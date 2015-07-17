@@ -11,7 +11,10 @@ yum -y install automake-devel aclocal autoconf autotools cmake make
 yum -y install g++ gcc gcc-c++ gcc-gfortran
 
 # libraries
-yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py
+yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py scipy
 
 # misc
 yum -y install bison bzip2 flex ncurses sudo
+
+# python packages
+easy_install pyfits
