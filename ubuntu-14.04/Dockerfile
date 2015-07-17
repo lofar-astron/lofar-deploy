@@ -48,5 +48,4 @@ RUN ${SCRIPTDIR}/install-wcslib.sh
 RUN ${SCRIPTDIR}/install-casacore.sh
 RUN ${SCRIPTDIR}/install-casarest.sh
 RUN ${SCRIPTDIR}/install-python-casacore.sh
-RUN ${SCRIPTDIR}/install-log4cplus.sh
 RUN ${SCRIPTDIR}/install-lofar.sh
