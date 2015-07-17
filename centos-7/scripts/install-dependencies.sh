@@ -14,7 +14,7 @@ yum -y install g++ gcc gcc-c++ gcc-gfortran
 yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py scipy
 
 # misc
-yum -y install bison bzip2 flex ncurses
+yum -y install bison bzip2 flex ncurses tcsh
 
 # python packages
 wget https://bootstrap.pypa.io/get-pip.py -O - | python
