@@ -17,5 +17,5 @@ yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack
 yum -y install bison bzip2 flex ncurses tcsh
 
 # python packages
-wget https://bootstrap.pypa.io/get-pip.py -O - | python
+wget --retry-connrefused https://bootstrap.pypa.io/get-pip.py -O - | python
 pip install pyfits pywcs python-monetdb xmlrunner

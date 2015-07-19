@@ -5,7 +5,7 @@ git clone https://github.com/casacore/casacore.git src
 mkdir build
 mkdir data
 cd data
-wget ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar
+wget --retry-connrefused ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar
 tar xf WSRT_Measures.ztar
 cd ..
 cd build
