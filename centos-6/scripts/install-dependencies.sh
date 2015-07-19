@@ -17,4 +17,5 @@ yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack
 yum -y install bison flex ncurses sudo tar bzip2 which
 
 # python packages
-easy_install pyfits
+wget --retry-connrefused https://bootstrap.pypa.io/get-pip.py -O - | python
+pip install pyfits pywcs python-monetdb xmlrunner
