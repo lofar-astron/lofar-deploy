@@ -33,5 +33,5 @@ before_script:
 script:
   - docker version
   - docker build -t local/lofar-${CONTAINER} ${CONTAINER}
-  - docker run loval/lofar${CONTAINER} /bin/bash -c '/tmp/script/make-all-tests-work.sh && /tmp/scripts/execute-tests.sh' 
+  - docker run local/lofar${CONTAINER} /bin/bash -c '/tmp/script/make-all-tests-work.sh && /tmp/scripts/execute-tests.sh' 
 
