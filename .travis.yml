@@ -6,12 +6,13 @@ env:
     - DOCKER_HOST=tcp://$HOST_IP:2375
     - DOCKER_PORT_RANGE=2400:2500
     - SLIRP_PORTS=$(seq 2375 2500)
- - CONTAINER=ubuntu-12.04
- - CONTAINER=ubuntu-14.04
- - CONTAINER=centos-6
- - CONTAINER=centos-7
- - CONTAINER=debian-7
- - CONTAINER=debian-8
+  matrix:
+    - CONTAINER=ubuntu-12.04
+    - CONTAINER=ubuntu-14.04
+    - CONTAINER=centos-6
+    - CONTAINER=centos-7
+    - CONTAINER=debian-7
+    - CONTAINER=debian-8
 
 before_install:
   - sudo sh -c "wget -qO- https://get.docker.io/gpg | apt-key add -"
