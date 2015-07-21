@@ -3,7 +3,7 @@
 #
 
 # set base image to centos
-FROM ubuntu:14.04
+FROM ubuntu:12.04
 
 # upgrade packages
 RUN apt-get update
