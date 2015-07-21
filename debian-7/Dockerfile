@@ -8,7 +8,7 @@ FROM debian:7
 # upgrade packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
-RUN apt-get upgrade
+RUN apt-get upgrade -y
 
 #
 # setup installation scripts
