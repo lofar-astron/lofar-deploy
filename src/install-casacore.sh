@@ -1,4 +1,5 @@
-mkdir -p ${INSTALLDIR}/casacore/{build,data}
+mkdir -p ${INSTALLDIR}/casacore/build
+mkdir -p ${INSTALLDIR}/casacore/data
 cd ${INSTALLDIR}/casacore && git clone https://github.com/casacore/casacore.git src
 cd ${INSTALLDIR}/casacore/data && wget --retry-connrefused ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar
 cd ${INSTALLDIR}/casacore/data && tar xf WSRT_Measures.ztar
