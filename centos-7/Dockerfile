@@ -1,55 +1,79 @@
-#
-# Dockerfiler to build LOFAR software container image
-#
+FROM  centos:7
 
-# set base image to centos
-FROM centos:7
+ENV USER lofar
+ENV INSTALLDIR /home/${USER}/opt
+ENV J 48
+ENV CFITSIO_VERSION 3370
+ENV WCSLIB_VERSION 5.9
+ENV LOG4CPLUS_VERSION 1.1.x
 
-# fix iputils error
+ENV COMMAND_ADD_USER adduser
+ENV PYTHON_VERSION 2.7
+
 RUN yum -y remove iputils
-
-# upgrade packages
 RUN yum -y update
 
-#
-# setup installation scripts
-#
-ENV SCRIPTDIR_HOST ./scripts/
-ENV SCRIPTDIR /tmp/scripts/
-RUN mkdir ${SCRIPTDIR}
-COPY ${SCRIPTDIR_HOST}*.sh ${SCRIPTDIR}
+RUN yum -y install sudo
+RUN yum -y install git svn wget 
+RUN yum -y install automake-devel aclocal autoconf autotools cmake make
+RUN yum -y install g++ gcc gcc-c++ gcc-gfortran
+RUN yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py bzip2-devel libicu-devel scipy
+RUN yum -y install bison flex ncurses sudo tar bzip2 which
+RUN wget --retry-connrefused https://bootstrap.pypa.io/get-pip.py -O - | python
+RUN pip install pyfits pywcs python-monetdb xmlrunner
 
-#
-# install required packages
-#
-RUN ${SCRIPTDIR}/install-dependencies.sh
+RUN groupadd sudo
+RUN adduser -m ${USER}
+RUN usermod -a -G sudo ${USER}
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
-#
-# create user account
-#
-ENV USER lofar
-RUN ${SCRIPTDIR}/setup-account.sh
 USER ${USER}
 
-#
-# setup installation directory
-#
-ENV INSTALLDIR /home/${USER}/opt
-RUN mkdir ${INSTALLDIR}
+RUN mkdir -p ${INSTALLDIR}/cfitsio/build
+RUN cd ${INSTALLDIR}/cfitsio && wget --retry-connrefused ftp://heasarc.gsfc.nasa.gov/software/fitsio/c/cfitsio${CFITSIO_VERSION}.tar.gz
+RUN cd ${INSTALLDIR}/cfitsio && tar xf cfitsio${CFITSIO_VERSION}.tar.gz
+RUN cd ${INSTALLDIR}/cfitsio/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/cfitsio/ ../cfitsio
+RUN cd ${INSTALLDIR}/cfitsio/build && make -j ${J}
+RUN cd ${INSTALLDIR}/cfitsio/build && make install
 
-#
-# set number of threads for build
-#
-ENV J 64
+RUN mkdir ${INSTALLDIR}/wcslib
+RUN cd ${INSTALLDIR}/wcslib && wget --retry-connrefused ftp://ftp.atnf.csiro.au/pub/software/wcslib/wcslib-${WCSLIB_VERSION}.tar.bz2
+RUN cd ${INSTALLDIR}/wcslib && tar xf wcslib-*.tar.bz2
+RUN cd ${INSTALLDIR}/wcslib/wcslib* && ./configure --prefix=${INSTALLDIR}/wcslib --with-cfitsiolib=${INSTALLDIR}/cfitsio/lib/ --with-cfitsioinc=${INSTALLDIR}/cfitsio/include/ --without-pgplot
+RUN cd ${INSTALLDIR}/wcslib/wcslib* && make
+RUN cd ${INSTALLDIR}/wcslib/wcslib* && make install
 
-#
-# install all packages
-#
-RUN ${SCRIPTDIR}/install-cfitsio.sh
-RUN ${SCRIPTDIR}/install-wcslib.sh
-RUN ${SCRIPTDIR}/install-casacore.sh
-RUN ${SCRIPTDIR}/install-casarest.sh
-RUN ${SCRIPTDIR}/install-python-casacore.sh
-RUN ${SCRIPTDIR}/install-log4cplus.sh
-RUN ${SCRIPTDIR}/install-lofar.sh
-# Running tests moved to integration testing
+RUN mkdir -p ${INSTALLDIR}/casacore/{build,data}
+RUN cd ${INSTALLDIR}/casacore && git clone https://github.com/casacore/casacore.git src
+RUN cd ${INSTALLDIR}/casacore/data && wget --retry-connrefused ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar
+RUN cd ${INSTALLDIR}/casacore/data && tar xf WSRT_Measures.ztar
+RUN cd ${INSTALLDIR}/casacore/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/casacore/ -DDATA_DIR=${INSTALLDIR}/casacore/data -DWCSLIB_ROOT_DIR=/${INSTALLDIR}/wcslib/ -DCFITSIO_ROOT_DIR=${INSTALLDIR}/cfitsio/ -DBUILD_PYTHON=True -DUSE_OPENMP=True -DUSE_FFTW3=TRUE ../src/
+RUN cd ${INSTALLDIR}/casacore/build && make -j ${J}
+RUN cd ${INSTALLDIR}/casacore/build && make install
+
+RUN mkdir -p ${INSTALLDIR}/casarest/build
+RUN cd ${INSTALLDIR}/casarest && svn co --quiet https://svn.astron.nl/casarest/trunk/casarest/ src
+RUN cd ${INSTALLDIR}/casarest/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/casarest -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DWCSLIB_ROOT_DIR=${INSTALLDIR}/wcslib -DCFITSIO_ROOT_DIR=${INSTALLDIR}/cfitsio ../src/
+RUN cd ${INSTALLDIR}/casarest/build && make -j ${J}
+RUN cd ${INSTALLDIR}/casarest/build && make install
+
+RUN mkdir ${INSTALLDIR}/python-casacore
+RUN cd ${INSTALLDIR}/python-casacore && git clone https://github.com/casacore/python-casacore
+RUN cd ${INSTALLDIR}/python-casacore/python-casacore ./setup.py build_ext -I${INSTALLDIR}/wcslib/include:${INSTALLDIR}/casacore/include/:${INSTALLDIR}/cfitsio/include -L${INSTALLDIR}/wcslib/lib:${INSTALLDIR}/casacore/lib/:${INSTALLDIR}/cfitsio/lib/
+RUN mkdir -p ${INSTALLDIR}/python-casacore/lib/python${PYTHON_VERSION}/site-packages/
+RUN mkdir -p ${INSTALLDIR}/python-casacore/lib64/python${PYTHON_VERSION}/site-packages/
+RUN cd ${INSTALLDIR}/python-casacore/python-casacore ./setup.py install --prefix=${INSTALLDIR}/python-casacore/
+
+RUN mkdir -p ${INSTALLDIR}/log4cplus/build
+RUN cd ${INSTALLDIR}/log4cplus && git clone https://github.com/log4cplus/log4cplus.git -b ${LOG4CPLUS_VERSION} src
+RUN cd ${INSTALLDIR}/log4cplus/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/log4cplus ../src/
+RUN cd ${INSTALLDIR}/log4cplus/build && make -j ${J}
+RUN cd ${INSTALLDIR}/log4cplus/build && make install
+
+RUN mkdir -p ${INSTALLDIR}/lofar/build/gnu_opt
+RUN cd ${INSTALLDIR}/lofar && svn --non-interactive -q --username lofar-guest --password lofar-guest co https://svn.astron.nl/LOFAR/trunk src
+RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && cmake -DBUILD_PACKAGES=Offline -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/lofar/ -DWCSLIB_ROOT_DIR=${INSTALLDIR}/wcslib/ -DCFITSIO_ROOT_DIR=${INSTALLDIR}/cfitsio/ -DCASAREST_ROOT_DIR=${INSTALLDIR}/casarest/ -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore/ -DLOG4CPLUS_ROOT_DIR=${INSTALLDIR}/log4cplus/ -DUSE_OPENMP=True ${INSTALLDIR}/lofar/src/
+RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && sed -i '29,31d' include/ApplCommon/PosixTime.h
+RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && make -j ${J}
+RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && make install
+

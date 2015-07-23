@@ -1,6 +1,5 @@
 DOCKERFILE=Dockerfile
 SRC_DIR=src
-BUILD_DIR=build
 IMAGE_PREFIX=test
 
 define prefix
