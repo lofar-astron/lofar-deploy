@@ -2,7 +2,7 @@
 USER lofar
 
 # Directory to install software in
-INSTALLDIR /home/lofar/opt
+INSTALLDIR /home/${USER}/opt
 
 # Number of threads to use for build
 J 48

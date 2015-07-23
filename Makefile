@@ -18,7 +18,6 @@ endef
 define docker-env
 	$(call prefix,$(1))
 	@sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' < ${SRC_DIR}/$(1).mk >> ${NAME}/${DOCKERFILE}
- 
 	@echo ""            >> ${NAME}/${DOCKERFILE}
 endef
 
@@ -28,8 +27,8 @@ define docker-from
 endef
 
 define docker-user
-	@echo "USER lofar" >> ${NAME}/${DOCKERFILE} #fixme: read lofar from env
-	@echo ""
+	@echo "USER $$""{USER}" >> ${NAME}/${DOCKERFILE}
+	@echo ""                >> ${NAME}/${DOCKERFILE}
 endef
 
 define build
@@ -37,7 +36,7 @@ define build
 endef
 
 define dockerfile
-	@mkdir -p ${NAME}
+	mkdir -p ${NAME}
 	@rm -f ${NAME}/${DOCKERFILE}
 	$(call docker-from,$(1))
 	$(call docker-env,common-environment)
@@ -59,14 +58,16 @@ dockerfile-centos-7: NAME="centos-7"
 dockerfile-centos-7:
 	$(call dockerfile,"centos:7")
 
+build-centos-7: NAME="centos-7"
 build-centos-7:
 	$(call dockerfile,"centos:7")
 	$(call build,${NAME})
 
-dockerfile-centos-6: NAME=centos-6
+dockerfile-centos-6: NAME="centos-6"
 dockerfile-centos-6:
 	$(call dockerfile,"centos:6")
 
+build-centos-6: NAME="centos-6"
 build-centos-6:
 	$(call dockerfile,"centos:6")
 	$(call build,${NAME})
