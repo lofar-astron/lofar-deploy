@@ -6,3 +6,7 @@ dockerfile:
 build:
 	$(call docker-file,${BASE})
 	$(call docker-build)
+
+# Rule to create a deploy script
+script:
+	$(call deploy-file)

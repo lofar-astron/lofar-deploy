@@ -1,5 +1,6 @@
 # Add docker FROM command
 define docker-from
+	$(call write-header,"base",${DOCKERFILE})
 	@echo "FROM " $(1) >> ${DOCKERFILE}
 	@echo ""           >> ${DOCKERFILE}
 endef
@@ -12,14 +13,14 @@ endef
 
 # Add docker RUN command, strips comments and empty lines
 define docker-run
-	$(call write-header,$(1))
+	$(call write-header,$(1),${DOCKERFILE})
 	@sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' $(2)/$(1).sh >> ${DOCKERFILE}
 	@echo ""                                               >> ${DOCKERFILE}
 endef
 
 # Add docker ENV command, strips comments and empty lines
 define docker-env
-	$(call write-header,$(1))
+	$(call write-header,$(1),${DOCKERFILE})
 	@sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' < $(2)/$(1).sh >> ${DOCKERFILE}
 	@echo ""                                                 >> ${DOCKERFILE}
 endef

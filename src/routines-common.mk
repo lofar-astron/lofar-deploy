@@ -1,6 +1,6 @@
 # Write a header
-define write_header
-	@echo "#"      >> ${DOCKERFILE}
-	@echo "#" $(1) >> ${DOCKERFILE}
-	@echo "#"      >> ${DOCKERFILE}
+define write-header
+	@echo "#"      >> $(2)
+	@echo "#" $(1) >> $(2)
+	@echo "#"      >> $(2)
 endef
