@@ -13,14 +13,14 @@ endef
 # Add docker RUN command, strips comments and empty lines
 define docker-run
 	$(call write-header,$(1))
-	@sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' $(2)/$(1).mk >> ${DOCKERFILE}
+	@sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' $(2)/$(1).sh >> ${DOCKERFILE}
 	@echo ""                                               >> ${DOCKERFILE}
 endef
 
 # Add docker ENV command, strips comments and empty lines
 define docker-env
 	$(call write-header,$(1))
-	@sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' < $(2)/$(1).mk >> ${DOCKERFILE}
+	@sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' < $(2)/$(1).sh >> ${DOCKERFILE}
 	@echo ""                                                 >> ${DOCKERFILE}
 endef
 
