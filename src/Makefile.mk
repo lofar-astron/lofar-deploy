@@ -1,7 +1,7 @@
 # Constants
 DOCKERFILE=Dockerfile
 DEPLOYFILE=deploy.sh
-OS=`basename ${PWD}`
+OS=`basename "${PWD}"`
 IMAGE_PREFIX=test
 SRC_DIR=../src
 
