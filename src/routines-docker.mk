@@ -48,3 +48,11 @@ define docker-file
 	$(call docker-run,install-log4cplus,${SRC_DIR})
 	$(call docker-run,install-lofar,${SRC_DIR})
 endef
+
+define docker-test-file
+	$(call docker-file,$(1))
+        $(call docker-run,${OS}-testprep,.)
+	$(call docker-run,prepare-tests,${SRC_DIR})
+        $(call docker-run,${OS}-tests,.)
+	$(call docker-run,run-tests,${SRC_DIR})
+endef 
