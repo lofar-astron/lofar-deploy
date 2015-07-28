@@ -21,8 +21,16 @@ endef
 # Add docker ENV command, strips comments and empty lines
 define docker-env
 	$(call write-header,$(1),${DOCKERFILE})
-	@sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' < $(2)/$(1).sh >> ${DOCKERFILE}
-	@echo ""                                                 >> ${DOCKERFILE}
+	@$(eval SCRIPT_FILE :=$(2)/$(1).sh)
+	@$(eval PATCH_FILE :=$(2)/$(1).patch)
+	@if [ -a ${SCRIPT_FILE} ]; \
+	then \
+		cat ${SCRIPT_FILE}; \
+	else \
+		patch $(2)/../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
+	fi \
+	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
+	@echo "" >> ${DOCKERFILE}
 endef
 
 # Build docker container
