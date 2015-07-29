@@ -1,0 +1,7 @@
+2c2,3
+< INSTALL_SSHD_PLACEHOLDER
+---
+> sudo yum -y install openssh-server csh
+> sudo sshd-keygen
+4d4
+< SSHD_SETTINGS_PLACEHOLDER

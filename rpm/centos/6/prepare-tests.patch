@@ -1,0 +1,11 @@
+2c2
+< INSTALL_SSHD_PLACEHOLDER
+---
+> sudo yum -y install openssh-server csh
+4,5c4,6
+< SSHD_SETTINGS_PLACEHOLDER
+< ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa 
+---
+> sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+> sudo ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
+> ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa

@@ -1,0 +1,8 @@
+2c2
+< INSTALL_SSHD_PLACEHOLDER
+---
+> sudo apt-get -y install openssh-server csh
+4c4
+< SSHD_SETTINGS_PLACEHOLDER
+---
+> sudo mkdir -p /var/run/sshd

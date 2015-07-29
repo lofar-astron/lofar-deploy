@@ -1,5 +1,7 @@
 #!/bin/bash
+INSTALL_SSHD_PLACEHOLDER
 mkdir -p ${HOME}/.ssh 
+SSHD_SETTINGS_PLACEHOLDER
 ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa 
 cat ${HOME}/.ssh/id_rsa.pub > ${HOME}/.ssh/authorized_keys 
 echo "StrictHostKeyChecking no" > ${HOME}/.ssh/config 
