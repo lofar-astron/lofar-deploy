@@ -69,6 +69,6 @@ define docker-test-file
 	$(call docker-file,$(1))
 	$(call docker-run,testprep)
 	$(call docker-run,prepare-tests)
-    $(call docker-run,tests)
+	$(call docker-run,tests)
 	$(call docker-run,run-tests)
 endef 
