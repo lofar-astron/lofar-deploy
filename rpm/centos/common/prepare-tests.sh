@@ -1,0 +1,1 @@
+../../common/prepare-tests.sh
