@@ -1,7 +1,7 @@
 # Constants
 DOCKERFILE=Dockerfile
 DEPLOYFILE=deploy.sh
-CONTAINER_PREFIX=test
+CONTAINER_PREFIX=lofar
 SRC_DIR=../../../common
 
 # Routines
