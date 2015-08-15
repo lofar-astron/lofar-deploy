@@ -1,7 +1,7 @@
 2c2
 < INSTALL_SSHD_PLACEHOLDER
 ---
-> sudo apt-get -y install openssh-server 
+> sudo apt-get -y install openssh-server python-nose
 4c4
 < SSHD_SETTINGS_PLACEHOLDER
 ---
