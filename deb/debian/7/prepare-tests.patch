@@ -1,7 +1,7 @@
 2c2
 < INSTALL_SSHD_PLACEHOLDER
 ---
-> sudo apt-get -y install openssh-server csh
+> sudo apt-get -y install openssh-server 
 4c4
 < SSHD_SETTINGS_PLACEHOLDER
 ---

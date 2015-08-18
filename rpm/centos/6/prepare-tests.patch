@@ -1,7 +1,7 @@
 2c2,3
 < INSTALL_SSHD_PLACEHOLDER
 ---
-> sudo yum -y install openssh-server csh
+> sudo yum -y install openssh-server 
 > sudo pip install unittest2
 4,5c5,7
 < SSHD_SETTINGS_PLACEHOLDER

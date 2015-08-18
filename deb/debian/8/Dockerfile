@@ -14,6 +14,10 @@ ENV WCSLIB_VERSION 5.9
 ENV LOG4CPLUS_VERSION 1.1.x
 
 #
+# host-userid-flag
+#
+ENV ADDUSER_FLAGS "-u 1024"
+#
 # environment
 #
 ENV DEBIAN_FRONTEND noninteractive
@@ -31,14 +35,14 @@ RUN apt-get -y install automake autotools-dev cmake make python-setuptools
 RUN apt-get -y install  g++ gcc gfortran
 RUN apt-get -y install libblas-dev libfftw3-dev python-dev liblapack-dev libpng-dev libxml2-dev python-numpy libreadline-dev libncurses-dev python-scipy liblog4cplus-dev
 RUN apt-get -y install libboost-dev libboost-python-dev libboost-thread-dev libboost-system-dev libboost-filesystem-dev libboost-iostreams-dev
-RUN apt-get -y install bison bzip2 flex csh python-xmlrunner python-pip
+RUN apt-get -y install bison bzip2 flex python-xmlrunner python-pip
 RUN pip install pyfits pywcs python-monetdb
 
 #
 # setup-account
 #
 RUN getent group sudo &>/dev/null || groupadd sudo
-RUN ${COMMAND_ADD_USER} -m ${USER}
+RUN ${COMMAND_ADD_USER} -m ${USER} ${ADDUSER_FLAGS}
 RUN usermod -a -G sudo ${USER}
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN sed -i 's/requiretty/!requiretty/g' /etc/sudoers
@@ -99,11 +103,6 @@ RUN cd ${INSTALLDIR}/python-casacore/python-casacore ./setup.py install --prefix
 #
 # install-log4cplus
 #
-RUN mkdir -p ${INSTALLDIR}/log4cplus/build
-RUN cd ${INSTALLDIR}/log4cplus && git clone https://github.com/log4cplus/log4cplus.git -b ${LOG4CPLUS_VERSION} src
-RUN cd ${INSTALLDIR}/log4cplus/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/log4cplus ../src/
-RUN cd ${INSTALLDIR}/log4cplus/build && make -j ${J}
-RUN cd ${INSTALLDIR}/log4cplus/build && make install
 
 #
 # install-lofar
@@ -114,4 +113,34 @@ RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && cmake -DBUILD_PACKAGES=Offline -DCMA
 RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && sed -i '29,31d' include/ApplCommon/PosixTime.h
 RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && make -j ${J}
 RUN cd ${INSTALLDIR}/lofar/build/gnu_opt && make install
+
+#
+# testprep
+#
+RUN sudo apt-get -y install openssh-server 
+RUN sudo mkdir -p /var/run/sshd 
+
+#
+# prepare-tests
+#
+RUN sudo apt-get -y install openssh-server 
+RUN mkdir -p ${HOME}/.ssh 
+RUN sudo mkdir -p /var/run/sshd
+RUN ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa 
+RUN cat ${HOME}/.ssh/id_rsa.pub > ${HOME}/.ssh/authorized_keys 
+RUN echo "StrictHostKeyChecking no" > ${HOME}/.ssh/config 
+RUN chmod 700 ${HOME}/.ssh 
+RUN chmod 600 ${HOME}/.ssh/authorized_keys 
+RUN chmod 600 ${HOME}/.ssh/id_rsa 
+RUN chmod 600 ${HOME}/.ssh/config
+
+#
+# tests
+#
+
+#
+# run-tests
+#
+RUN cd ${INSTALLDIR}/casacore/build && make test 
+RUN sudo /usr/sbin/sshd && cd ${INSTALLDIR}/lofar/build/gnu_opt && make test
 
