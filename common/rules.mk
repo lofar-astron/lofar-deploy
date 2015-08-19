@@ -1,3 +1,6 @@
+# Set default shell
+SHELL=/bin/bash
+
 # Rule to create a Dockerfile
 dockerfile:
 	$(call docker-file,${BASE})
