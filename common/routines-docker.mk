@@ -47,9 +47,9 @@ define docker-build
 	@docker build -t ${CONTAINER_NAME} .
 endef
 
-# Add user id of the current user to the docker build script
-define docker-uid
-	$(call write-header,uid,${DOCKERFILE})
+# Add user id of the user calling this Makefile
+define docker-set-uid
+	$(call write-header,set-uid,${DOCKERFILE})
 	@$(eval UID = $(shell id -u))
 	@echo "ENV UID ${UID}" >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
@@ -60,8 +60,9 @@ define docker-file
 	@rm -f ${DOCKERFILE}
 	$(call docker-from,$(1))
 	$(call docker-env,common-environment)
-	$(call docker-uid)
 	$(call docker-env,environment)
+	$(call docker-set-uid)
+    $(call set-build-options,${DOCKERFILE})
 	$(call docker-run,base)
 	$(call docker-run,setup-account)
 	$(call docker-user)
