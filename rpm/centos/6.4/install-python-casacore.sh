@@ -1,1 +1,0 @@
-../6/install-python-casacore.sh
