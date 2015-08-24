@@ -47,11 +47,12 @@ define docker-build
 	@docker build -t ${CONTAINER_NAME} .
 endef
 
-# add -u $(id -u) as a variable t the docker build script
+# Add user id of the current user to the docker build script
 define docker-uid
-	$(call write-header, host-userid-flag, ${DOCKERFILE})
+	$(call write-header,uid,${DOCKERFILE})
 	@$(eval UID = $(shell id -u))
-	@echo "ENV ADDUSER_FLAGS \"-u ${UID}\"" >> ${DOCKERFILE}
+	@echo "ENV UID ${UID}" >> ${DOCKERFILE}
+	@echo "" >> ${DOCKERFILE}
 endef
 
 # Construct a full Dockerfile

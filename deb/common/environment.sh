@@ -1,3 +1,2 @@
 DEBIAN_FRONTEND noninteractive
-COMMAND_ADD_USER useradd
 PYTHON_VERSION 2.7
