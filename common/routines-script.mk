@@ -10,7 +10,7 @@ define script-run
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
-	@echo ""                                >> ${DEPLOYFILE}
+	@echo ""                    >> ${DEPLOYFILE}
 endef
 
 # Add export, strips comments and empty lines
@@ -25,7 +25,7 @@ define script-env
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
-	@echo ""                                                                 >> ${DEPLOYFILE}
+	@echo ""                                                   >> ${DEPLOYFILE}
 endef
 
 # Construct a deploy script
@@ -34,7 +34,6 @@ define deploy-file
 	$(call script-env,common-environment)
 	$(call script-env,environment)
 	$(call script-run,base)
-	$(call script-run,setup-account)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
