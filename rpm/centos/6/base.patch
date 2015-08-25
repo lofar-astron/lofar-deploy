@@ -3,7 +3,7 @@
 15a17,20
 > # new version of boost needed than the one in the standard repo. Adding the EPEL repo for install.
 > rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-> yum -y update 
+> yum -y upgrade ca-certificates --disablerepo=epel && yum -y update 
 > 
 17c22,25
 < yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py bzip2-devel libicu-devel scipy
