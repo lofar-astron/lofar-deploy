@@ -1,8 +1,10 @@
-2c2
+2,3c2,3
 < INSTALL_SSHD_PLACEHOLDER
+< PACKAGE_MANAGER -y install csh
 ---
 > sudo apt-get -y install openssh-server python-nose
-4c4
+> apt-get -y install csh
+5c5
 < SSHD_SETTINGS_PLACEHOLDER
 ---
 > sudo mkdir -p /var/run/sshd
