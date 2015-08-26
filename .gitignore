@@ -1,2 +1,2 @@
-*/*/*/Dockerfile
-*/deploy.sh
+**/Dockerfile
+**/deploy.sh
