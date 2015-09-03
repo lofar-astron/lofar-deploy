@@ -68,6 +68,7 @@ define docker-file
 	$(call docker-run,install-wcslib)
 	$(call docker-run,install-casacore)
 	$(call docker-run,install-casarest)
+	$(call docker-run,install-casasynthesis)
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-log4cplus)
 	$(call docker-run,install-lofar)

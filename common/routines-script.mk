@@ -39,6 +39,7 @@ define deploy-file
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
 	$(call script-run,install-casarest)
+	$(call script-run,install-casasynthesis)
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-log4cplus)
 	$(call script-run,install-lofar)
