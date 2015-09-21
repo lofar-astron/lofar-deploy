@@ -61,6 +61,7 @@ define docker-file
 	$(call docker-from,$(1))
 	$(call docker-env,common-environment)
 	$(call docker-env,environment)
+	$(call docker-env,versions)
 	$(call docker-set-uid)
     $(call set-build-options,${DOCKERFILE})
 	$(call docker-run,base)
