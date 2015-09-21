@@ -1,1 +1,1 @@
-../versions/2_12_1
+../versions/latest
