@@ -1,5 +1,6 @@
 #!/bin/bash
 INSTALL_SSHD_PLACEHOLDER
+sudo PACKAGE_MANAGER -y install csh
 mkdir -p ${HOME}/.ssh 
 SSHD_SETTINGS_PLACEHOLDER
 ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa 

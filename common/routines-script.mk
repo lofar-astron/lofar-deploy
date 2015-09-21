@@ -33,6 +33,7 @@ define deploy-file
 	@rm -f ${DEPLOYFILE}
 	$(call script-env,common-environment)
 	$(call script-env,environment)
+	$(call script-env,versions)
 	$(call script-run,base)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
