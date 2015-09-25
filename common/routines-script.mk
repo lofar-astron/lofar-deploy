@@ -9,8 +9,8 @@ define script-run
 	else \
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
-	@echo ""                    >> ${DEPLOYFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' >> ${DEPLOYFILE}
+	@echo ""                      >> ${DEPLOYFILE}
 endef
 
 # Add export, strips comments and empty lines
@@ -24,8 +24,8 @@ define script-env
 	else \
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
-	@echo ""                                                   >> ${DEPLOYFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
+	@echo ""                                                     >> ${DEPLOYFILE}
 endef
 
 # Construct a deploy script

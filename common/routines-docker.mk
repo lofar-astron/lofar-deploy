@@ -22,7 +22,7 @@ define docker-run
 	else \
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
 endef
 
@@ -37,7 +37,7 @@ define docker-env
 	else \
 		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
 endef
 
