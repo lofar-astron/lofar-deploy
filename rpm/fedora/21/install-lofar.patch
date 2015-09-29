@@ -1,2 +1,0 @@
-3a4
-> sed -i -e '28i#include <cstring>' -e 's/memcpy/std::memcpy/' ${INSTALLDIR}/lofar/src/CEP/DP3/AOFlagger/src/msio/image2d.cpp # Reported upstream as #5804
