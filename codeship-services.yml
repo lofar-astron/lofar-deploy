@@ -1,0 +1,5 @@
+app:
+    build:
+        build: ./deb/debian/8
+    configure: 
+        command: cd deb/debian/8 && make test
