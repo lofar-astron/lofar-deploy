@@ -25,7 +25,9 @@ define script-run
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
-		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
+		ln -s ../common/$(1).sh to_patch && \
+		patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2>/dev/null  && \
+		rm to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
 	@echo ""                    >> ${DEPLOYFILE}
@@ -40,7 +42,9 @@ define script-env
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
-		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
+		ln -s ../common/$(1).sh to_patch && \
+		patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2> /dev/null; \
+		rm to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
 	@echo ""                                                   >> ${DEPLOYFILE}

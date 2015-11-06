@@ -38,7 +38,9 @@ define docker-run
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
-		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
+                ln -s ../common/$(1).sh to_patch && \
+                patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2>/dev/null  && \
+                rm to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
@@ -53,7 +55,9 @@ define docker-env
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
-		patch --follow-symlinks ../common/$(1).sh ${PATCH_FILE} -o - 2> /dev/null; \
+                ln -s ../common/$(1).sh to_patch && \
+                patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2>/dev/null  && \
+                rm to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
