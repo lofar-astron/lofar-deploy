@@ -34,13 +34,14 @@ define docker-run
 	$(call write-header,$(1),${DOCKERFILE})
 	@$(eval SCRIPT_FILE := $(1).sh)
 	@$(eval PATCH_FILE := $(1).patch)
+        @$(eval PATCH_FLAG := $(shell ../../../common/scripts/test-patch.sh))
 	@if [ -a ${SCRIPT_FILE} ]; \
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
-                ln -s ../common/$(1).sh to_patch && \
-                patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2>/dev/null  && \
-                rm to_patch; \
+		ln -s ../common/$(1).sh to_patch && \
+		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o -  2> /dev/null&& \
+		rm -f to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
@@ -51,13 +52,14 @@ define docker-env
 	$(call write-header,$(1),${DOCKERFILE})
 	@$(eval SCRIPT_FILE := $(1).sh)
 	@$(eval PATCH_FILE := $(1).patch)
+	@$(eval PATCH_FLAG := $(shell ../../../common/scripts/test-patch.sh))
 	@if [ -a ${SCRIPT_FILE} ]; \
 	then \
 		cat ${SCRIPT_FILE}; \
 	else \
                 ln -s ../common/$(1).sh to_patch && \
-                patch --follow-symlinks to_patch ${PATCH_FILE} -o - 2>/dev/null  && \
-                rm to_patch; \
+                patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null && \
+                rm -f to_patch; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
