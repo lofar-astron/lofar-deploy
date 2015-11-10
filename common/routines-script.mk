@@ -30,8 +30,8 @@ define script-run
 		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2>> ./patch_log  && \
 		rm -f to_patch; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
-	@echo ""                    >> ${DEPLOYFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' >> ${DEPLOYFILE}
+	@echo ""                      >> ${DEPLOYFILE}
 endef
 
 # Add export, strips comments and empty lines
@@ -48,8 +48,8 @@ define script-env
 		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> ./dev/null && \
 		rm -f to_patch; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
-	@echo ""                                                   >> ${DEPLOYFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
+	@echo ""                                                     >> ${DEPLOYFILE}
 endef
 
 # Construct a deploy script

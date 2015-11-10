@@ -43,7 +43,7 @@ define docker-run
 		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o -  2> /dev/null&& \
 		rm -f to_patch; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
 endef
 
@@ -61,7 +61,7 @@ define docker-env
                 patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null && \
                 rm -f to_patch; \
 	fi \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
+	| sed -e '/#$$/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
 endef
 
