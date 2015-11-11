@@ -40,11 +40,11 @@ define docker-run
 		cat ${SCRIPT_FILE}; \
 	else \
 		ln -s ../common/$(1).sh to_patch && \
-		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o -  2> /dev/null&& \
-		rm -f to_patch; \
+		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o -  2> /dev/null ;\
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
+	@rm -f to_patch
 endef
 
 # Add docker ENV command, strips comments and empty lines
@@ -58,11 +58,11 @@ define docker-env
 		cat ${SCRIPT_FILE}; \
 	else \
                 ln -s ../common/$(1).sh to_patch && \
-                patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null && \
-                rm -f to_patch; \
+                patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
+	@rm -f to_patch
 endef
 
 # Build docker container
