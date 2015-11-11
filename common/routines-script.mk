@@ -45,7 +45,7 @@ define script-env
 		cat ${SCRIPT_FILE}; \
 	else \
 		ln -s ../common/$(1).sh to_patch && \
-		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> ./dev/null ; \
+		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null ; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
 	@echo ""                                                   >> ${DEPLOYFILE}
