@@ -27,7 +27,7 @@ define script-run
 		cat ${SCRIPT_FILE}; \
 	else \
 		ln -s ../common/$(1).sh to_patch && \
-		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> ./dev/null ; \
+		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null ; \
 	fi \
 	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
 	@echo ""                    >> ${DEPLOYFILE}
