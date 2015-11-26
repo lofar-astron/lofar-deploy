@@ -65,6 +65,12 @@ define docker-env
 	@rm -f to_patch
 endef
 
+define docker-init
+	$(call write-header,$(1),${DOCKERFILE})
+	@cat ../../../common/scripts/$(1).sh | sed -e '/#/d' -e '/^$$/d' -e "s/^\(.*\)/RUN sudo sh -c 'echo \1 >> \/usr\/bin\/$(1).sh'/g" -e 's~\$$~\\$$~g' >> ${DOCKERFILE}
+	@echo 'RUN sudo sh -c "echo source /usr/bin/$(1).sh >> /usr/bin/init.sh"' >> ${DOCKERFILE}
+endef
+
 # Build docker container
 define docker-build
 	@$(eval CONTAINER_NAME := ${CONTAINER_PREFIX}-$(shell sed "s/:/-/" <<< ${BASE}))
@@ -77,6 +83,10 @@ define docker-set-uid
 	@$(eval UID = $(shell id -u))
 	@echo "ENV UID ${UID}" >> ${DOCKERFILE}
 	@echo "" >> ${DOCKERFILE}
+endef
+
+define docker-entrypoint
+	@echo 'ENTRYPOINT /bin/bash --init-file /usr/bin/init.sh' >> ${DOCKERFILE}
 endef
 
 # Construct a full Dockerfile
@@ -98,6 +108,8 @@ define docker-file
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-log4cplus)
 	$(call docker-run,install-lofar)
+        $(call docker-init,init-lofar)
+	$(call docker-entrypoint)
 endef
 
 define docker-test-file

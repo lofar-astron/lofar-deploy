@@ -52,6 +52,13 @@ define script-env
 	@rm -f to_patch
 endef
 
+define script-init
+        $(call write-header,$(1),${DEPLOYFILE})
+	@echo mkdir -p \$${INSTALLDIR}/bin >> ${DEPLOYFILE}
+        @echo 'cat ${PWD}/../../../common/scripts/$(1).sh | sed -e "s+\$${INSTALLDIR}+$${INSTALLDIR}+g" > $${INSTALLDIR}/bin/$(1).sh' >> ${DEPLOYFILE}
+        @echo 'echo "source $${INSTALLDIR}/bin/$(1).sh" >> $${INSTALLDIR}/init.sh' >> ${DEPLOYFILE}
+endef
+
 # Construct a deploy script
 define deploy-file
 	@rm -f ${DEPLOYFILE}
@@ -66,4 +73,5 @@ define deploy-file
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-log4cplus)
 	$(call script-run,install-lofar)
+	$(call script-init,init-lofar)
 endef
