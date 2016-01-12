@@ -1,0 +1,12 @@
+29c29
+< yum -y install automake-devel aclocal autoconf autotools cmake make
+---
+> yum -y install automake autoconf cmake make
+32c32
+< yum -y install g++ gcc gcc-c++ gcc-gfortran
+---
+> yum -y install gcc-c++ gcc-gfortran redhat-rpm-config
+35c35
+< yum -y install blas-devel boost-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py bzip2-devel libicu-devel scipy
+---
+> yum -y install blas-devel boost-devel fftw-devel fftw-libs python-devel lapack-devel libpng-devel libxml2-devel numpy readline-devel ncurses-devel numpy-f2py bzip2-devel libicu-devel scipy --allowerasing
