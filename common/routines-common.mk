@@ -26,7 +26,17 @@ endef
 # Add number of threads as J flag
 define set-build-options
 	$(call write-header,$(0),$(1))
-	@$(eval J = `cat /proc/cpuinfo | grep processor | wc -l`)
+	@$(eval UNAME_S := $(shell uname -s))
+	@$(eval J := $(shell \
+	if [ $(UNAME_S) == Linux ]; \
+	then \
+		cat /proc/cpuinfo | grep processor | wc -l; \
+	elif [ $(UNAME_S) == Darwin ];  \
+	then \
+		sysctl -n hw.ncpu; \
+	else \
+		echo 1; \
+	fi))
 	@echo "ENV J ${J}" >> ${1}
 	@echo "" >> ${1}
 endef
