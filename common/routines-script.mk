@@ -65,6 +65,7 @@ define deploy-file
 	$(call script-env,common-environment)
 	$(call script-env,environment)
 	$(call script-env,versions)
+	$(call set-build-options,${DEPLOYFILE})
 	$(call script-run,base)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
