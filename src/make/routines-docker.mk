@@ -32,7 +32,7 @@ endef
 # Add docker RUN command, strips comments and empty lines
 define docker-run
 	$(call write-header,$(1),${DOCKERFILE})
-	@../../../common/scripts/patch-script.sh $(1) \
+	@${MAKE_DIR}/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
 	@echo ""							       >> ${DOCKERFILE}
 endef
@@ -40,14 +40,14 @@ endef
 # Add docker ENV command, strips comments and empty lines
 define docker-env
 	$(call write-header,$(1),${DOCKERFILE})
-	@../../../common/scripts/patch-script.sh $(1) \
+	@${MAKE_DIR}/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/^/ENV /' >> ${DOCKERFILE}
 	@echo ""                                   >> ${DOCKERFILE}
 endef
 
 define docker-init
 	$(call write-header,$(1),${DOCKERFILE})
-	@cat ../../../common/scripts/$(1).sh | sed -e '/#/d' -e '/^$$/d' -e "s/^\(.*\)/RUN sudo sh -c 'echo \1 >> \/usr\/bin\/$(1).sh'/g" -e 's~\$$~\\$$~g' >> ${DOCKERFILE}
+	@cat ${COMMON_DIR}/$(1).sh | sed -e '/#/d' -e '/^$$/d' -e "s/^\(.*\)/RUN sudo sh -c 'echo \1 >> \/usr\/bin\/$(1).sh'/g" -e 's~\$$~\\$$~g' >> ${DOCKERFILE}
 	@echo 'RUN sudo sh -c "echo source /usr/bin/$(1).sh >> /usr/bin/init.sh"' >> ${DOCKERFILE}
 	@echo ""                                                                  >> ${DOCKERFILE}
 endef

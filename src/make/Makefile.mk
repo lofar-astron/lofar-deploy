@@ -20,12 +20,13 @@
 DOCKERFILE=Dockerfile
 DEPLOYFILE=deploy.sh
 CONTAINER_PREFIX=lofar
-SRC_DIR=../../../common
+MAKE_DIR=../../../make
+COMMON_DIR=../../../common
 
 # Routines
-include ${SRC_DIR}/routines-common.mk
-include ${SRC_DIR}/routines-docker.mk
-include ${SRC_DIR}/routines-script.mk
+include ${MAKE_DIR}/routines-common.mk
+include ${MAKE_DIR}/routines-docker.mk
+include ${MAKE_DIR}/routines-script.mk
 
 # Rules
-include ${SRC_DIR}/rules.mk
+include ${MAKE_DIR}/rules.mk

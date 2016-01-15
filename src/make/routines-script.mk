@@ -19,7 +19,7 @@
 # Add command, strips comments and empty lines
 define script-run
 	$(call write-header,$(1),${DEPLOYFILE})
-	@../../../common/scripts/patch-script.sh $(1) \
+	@${MAKE_DIR}/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
 	@echo ""                    >> ${DEPLOYFILE}
 endef
@@ -27,7 +27,7 @@ endef
 # Add export, strips comments and empty lines
 define script-env
 	$(call write-header,$(1),${DEPLOYFILE})
-	@../../../common/scripts/patch-script.sh $(1) \
+	@${MAKE_DIR}/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
 	@echo ""                                                   >> ${DEPLOYFILE}
 endef
@@ -35,7 +35,7 @@ endef
 define script-init
 	$(call write-header,$(1),${DEPLOYFILE})
 	@echo mkdir -p \$${INSTALLDIR}/bin >> ${DEPLOYFILE}
-        @echo 'cat ${PWD}/../../../common/scripts/$(1).sh | sed -e "s+\$${INSTALLDIR}+$${INSTALLDIR}+g" > $${INSTALLDIR}/bin/$(1).sh' >> ${DEPLOYFILE}
+	@echo 'cat ${COMMON_DIR}/$(1).sh | sed -e "s+\$${INSTALLDIR}+$${INSTALLDIR}+g" > $${INSTALLDIR}/bin/$(1).sh' >> ${DEPLOYFILE}
 	@echo 'echo "source $${INSTALLDIR}/bin/$(1).sh" >> $${INSTALLDIR}/init.sh' >> ${DEPLOYFILE}
 endef
 
