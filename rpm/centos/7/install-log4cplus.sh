@@ -1,1 +1,0 @@
-../../common/install-log4cplus.sh

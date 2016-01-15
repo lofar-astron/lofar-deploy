@@ -16,11 +16,4 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-#!/bin/bash
-patch --follow-symlinks /dev/null /dev/null 2> /dev/null
-
-if [ $? -eq 0 ];
-then
-echo --follow-symlinks
-fi
-
+echo "log4cplus is installed from the repositories"
