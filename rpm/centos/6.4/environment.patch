@@ -1,1 +1,4 @@
-../6/environment.patch
+2c2
+< PYTHON_VERSION
+---
+> PYTHON_VERSION 2.6

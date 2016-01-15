@@ -1,1 +1,0 @@
-../common/install-casacore.sh

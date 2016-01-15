@@ -40,3 +40,7 @@ build-test:
 # Rule to create a deploy script
 script:
 	$(call deploy-file)
+
+# Rule to cleanup Dockerfile and deploy.sh
+clean:
+	@rm -f Dockerfile deploy.sh

@@ -19,44 +19,24 @@
 # Add command, strips comments and empty lines
 define script-run
 	$(call write-header,$(1),${DEPLOYFILE})
-	@$(eval SCRIPT_FILE := $(1).sh)
-	@$(eval PATCH_FILE := $(1).patch)
-	@$(eval PATCH_FLAG := $(shell ../../../common/scripts/test-patch.sh))
-	@if [ -a ${SCRIPT_FILE} ]; \
-	then \
-		cat ${SCRIPT_FILE}; \
-	else \
-		ln -s ../common/$(1).sh to_patch && \
-		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null ; \
-	fi \
+	@../../../common/scripts/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
 	@echo ""                    >> ${DEPLOYFILE}
-	@rm -f to_patch
 endef
 
 # Add export, strips comments and empty lines
 define script-env
 	$(call write-header,$(1),${DEPLOYFILE})
-	@$(eval SCRIPT_FILE := $(1).sh)
-	@$(eval PATCH_FILE := $(1).patch)
-	@$(eval PATCH_FLAG := $(shell ../../../common/scripts/test-patch.sh))
-	@if [ -a ${SCRIPT_FILE} ]; \
-	then \
-		cat ${SCRIPT_FILE}; \
-	else \
-		ln -s ../common/$(1).sh to_patch && \
-		patch ${PATCH_FLAG} to_patch ${PATCH_FILE} -o - 2> /dev/null ; \
-	fi \
+	@../../../common/scripts/patch-script.sh $(1) \
 	| sed -e '/#/d' -e '/^$$/d' -e 's/ /=/g' -e 's/^/export /' >> ${DEPLOYFILE}
 	@echo ""                                                   >> ${DEPLOYFILE}
-	@rm -f to_patch
 endef
 
 define script-init
-        $(call write-header,$(1),${DEPLOYFILE})
+	$(call write-header,$(1),${DEPLOYFILE})
 	@echo mkdir -p \$${INSTALLDIR}/bin >> ${DEPLOYFILE}
         @echo 'cat ${PWD}/../../../common/scripts/$(1).sh | sed -e "s+\$${INSTALLDIR}+$${INSTALLDIR}+g" > $${INSTALLDIR}/bin/$(1).sh' >> ${DEPLOYFILE}
-        @echo 'echo "source $${INSTALLDIR}/bin/$(1).sh" >> $${INSTALLDIR}/init.sh' >> ${DEPLOYFILE}
+	@echo 'echo "source $${INSTALLDIR}/bin/$(1).sh" >> $${INSTALLDIR}/init.sh' >> ${DEPLOYFILE}
 endef
 
 # Construct a deploy script
