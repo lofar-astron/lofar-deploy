@@ -19,6 +19,8 @@
 # Set default shell
 SHELL=/bin/bash
 
+default: dockerfile script
+
 # Rule to create a Dockerfile
 dockerfile:
 	$(call docker-file,${BASE})
@@ -43,4 +45,5 @@ script:
 
 # Rule to cleanup Dockerfile and deploy.sh
 clean:
-	@rm -f Dockerfile deploy.sh
+	@rm -f ${DOCKERFILE}
+	@rm -f ${DEPLOYFILE}
