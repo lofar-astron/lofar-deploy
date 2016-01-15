@@ -19,9 +19,11 @@
 # Add command, strips comments and empty lines
 define script-run
 	$(call write-header,$(1),${DEPLOYFILE})
+	@echo "echo \`date\` \"Started $(1)\""   >> ${DEPLOYFILE}
 	@${MAKE_DIR}/patch-script.sh $(1) \
-	| sed -e '/#/d' -e '/^$$/d' >> ${DEPLOYFILE}
-	@echo ""                    >> ${DEPLOYFILE}
+	| sed -e '/#/d' -e '/^$$/d'              >> ${DEPLOYFILE}
+	@echo "echo \`date\` \"Completed $(1)\"" >> ${DEPLOYFILE}
+	@echo ""                                 >> ${DEPLOYFILE}
 endef
 
 # Add export, strips comments and empty lines
