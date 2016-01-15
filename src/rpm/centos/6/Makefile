@@ -1,2 +1,2 @@
 BASE="centos:6"
-include ../../../common/Makefile.mk
+include ../../../make/Makefile.mk

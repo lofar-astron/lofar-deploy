@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #
 # Copyright (C) 2015
 # This file is part of lofar-profiling.
@@ -15,19 +17,13 @@
 # You should have received a copy of the GNU General Public License
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
+# This script returns the (patched) shell script that is passed as input
+# It will start looking in the current directory, and will go the  parent
+# directory when the file is not found. When a patch file is found instead,
+# it will continue looking for the corresponding script and patch it.
+# Note that the first occurrence of a file is taken into account. This allows
+# for overriding top-level scripts or patches for specific distributions.
+#
 
-# Constants
-DOCKERFILE=Dockerfile
-DEPLOYFILE=deploy.sh
-CONTAINER_PREFIX=lofar
-MAKE_DIR=../../../make
-COMMON_DIR=../../../common
-BUILD_DIR=../../../../build
-
-# Routines
-include ${MAKE_DIR}/routines-common.mk
-include ${MAKE_DIR}/routines-docker.mk
-include ${MAKE_DIR}/routines-script.mk
-
-# Rules
-include ${MAKE_DIR}/rules.mk
+NAME=$(eval pwd | tr "//" "\n" | tail -n 2 | tr "\n" "-" | head -c -1)
+echo ${NAME}

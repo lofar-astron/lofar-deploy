@@ -55,7 +55,7 @@ endef
 # Build docker container
 define docker-build
 	@$(eval CONTAINER_NAME := ${CONTAINER_PREFIX}-$(shell sed "s/:/-/" <<< ${BASE}))
-	@docker build -t ${CONTAINER_NAME} .
+	@docker build -t ${CONTAINER_NAME}
 endef
 
 # Add user id of the user calling this Makefile
@@ -94,6 +94,7 @@ define docker-file
 	$(call docker-run,install-lofar)
 	$(call docker-init,init-lofar)
 	$(call docker-entrypoint)
+	$(call install,${DOCKERFILE})
 endef
 
 define docker-test-file

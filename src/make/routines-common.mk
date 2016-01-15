@@ -40,3 +40,10 @@ define set-build-options
 	@echo "ENV J ${J}" >> ${1}
 	@echo "" >> ${1}
 endef
+
+# Make a renamed copy of a file (DOCKERFILE or DEPLOYFILE) in the build directory
+define install
+	@$(eval NAME := $(shell ${MAKE_DIR}/dirname.sh))
+	@mkdir -p ${BUILD_DIR}
+	@cp ${PWD}/$(1) ${BUILD_DIR}/${NAME}-$(1)
+endef

@@ -47,3 +47,5 @@ script:
 clean:
 	@rm -f ${DOCKERFILE}
 	@rm -f ${DEPLOYFILE}
+	@rm -f ${BUILD_DIR}/*${DOCKERFILE}
+	@rm -f ${BUILD_DIR}/*${DEPLOYFILE}

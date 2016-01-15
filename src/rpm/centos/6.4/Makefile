@@ -1,2 +1,2 @@
 BASE="imtiaz/centos64"
-include ../../../common/Makefile.mk
+include ../../../make/Makefile.mk
