@@ -24,6 +24,5 @@
 # Note that the first occurrence of a file is taken into account. This allows
 # for overriding top-level scripts or patches for specific distributions.
 #
-
-NAME=$(eval pwd | tr "//" "\n" | tail -n 2 | tr "\n" "-" | head -c -1)
+NAME=$(eval pwd | awk -F/ '{print $(NF-1)"-"$NF}')
 echo ${NAME}
