@@ -25,7 +25,6 @@ endef
 
 # Add number of threads as J flag
 define set-build-options
-	$(call write-header,$(0),$(1))
 	@$(eval UNAME_S := $(shell uname -s))
 	@$(eval J := $(shell \
 	if [ $(UNAME_S) == Linux ]; \
@@ -37,8 +36,7 @@ define set-build-options
 	else \
 		echo 1; \
 	fi))
-	@echo "ENV J ${J}" >> ${1}
-	@echo "" >> ${1}
+	@echo "${J}"  >> $(1)
 endef
 
 # Make a renamed copy of a file (DOCKERFILE or DEPLOYFILE) in the build directory

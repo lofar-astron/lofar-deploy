@@ -72,6 +72,13 @@ define docker-entrypoint
 	@echo ""                                                  >> ${DOCKERFILE}
 endef
 
+define docker-build-options
+        $(call write-header,"build environment", ${DOCKERFILE})
+	@echo -n 'ENV J '                 >> ${DOCKERFILE}
+	$(call set-build-options,${DOCKERFILE})
+	@echo ""                      >> ${DOCKERFILE}
+endef
+
 # Construct a full Dockerfile
 define docker-file
 	@rm -f ${DOCKERFILE}
@@ -80,7 +87,7 @@ define docker-file
 	$(call docker-env,environment)
 	$(call docker-env,versions)
 	$(call docker-set-uid)
-	$(call set-build-options,${DOCKERFILE})
+	$(call docker-build-options)
 	$(call docker-run,base)
 	$(call docker-run,setup-account)
 	$(call docker-user)

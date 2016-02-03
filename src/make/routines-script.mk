@@ -41,13 +41,20 @@ define script-init
 	@echo 'echo "source $${INSTALLDIR}/bin/$(1).sh" >> $${INSTALLDIR}/init.sh' >> ${DEPLOYFILE}
 endef
 
+define script-build-options
+        $(call write-header,"build environment", ${DEPLOYFILE})
+        @echo -n 'export J='                 >> ${DEPLOYFILE}
+        $(call set-build-options,${DEPLOYFILE})
+        @echo ""                      >> ${DEPLOYFILE}
+endef
+
 # Construct a deploy script
 define deploy-file
 	@rm -f ${DEPLOYFILE}
 	$(call script-env,common-environment)
 	$(call script-env,environment)
 	$(call script-env,versions)
-	$(call set-build-options,${DEPLOYFILE})
+	$(call script-build-options)
 	$(call script-run,base)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
