@@ -43,5 +43,5 @@ endef
 define install
 	@$(eval NAME := $(shell ${MAKE_DIR}/dirname.sh))
 	@mkdir -p ${BUILD_DIR}
-	@cp ${PWD}/$(1) ${BUILD_DIR}/${NAME}-$(1)
+	@cp "${PWD}/$(1)" "${BUILD_DIR}/${NAME}-$(1)"
 endef
