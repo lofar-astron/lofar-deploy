@@ -1,0 +1,14 @@
+2,3c2,4
+< INSTALL_SSHD_PLACEHOLDER
+< sudo PACKAGE_MANAGER -y install csh
+---
+> sudo yum -y install openssh-server 
+> sudo pip install unittest2
+> sudo yum -y install csh
+5,6c6,8
+< SSHD_SETTINGS_PLACEHOLDER
+< ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa 
+---
+> sudo ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa
+> sudo ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa
+> ssh-keygen -t rsa -N "" -f ${HOME}/.ssh/id_rsa
