@@ -34,6 +34,7 @@ default:
 	$(call build,src/rpm/centos/7)
 	$(call build,src/rpm/fedora/21)
 	$(call build,src/rpm/fedora/23)
+	$(call build,src/rpm/suse/42.1)
 
 clean:
 	$(call clean,src/deb/ubuntu/14.04)
@@ -45,3 +46,4 @@ clean:
 	$(call clean,src/rpm/centos/7)
 	$(call clean,src/rpm/fedora/21)
 	$(call clean,src/rpm/fedora/23)
+	$(call build,src/rpm/suse/42.1)
