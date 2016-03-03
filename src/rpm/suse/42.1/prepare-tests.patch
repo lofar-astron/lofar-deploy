@@ -2,8 +2,8 @@
 < INSTALL_SSHD_PLACEHOLDER
 < sudo PACKAGE_MANAGER -y install csh
 ---
-> sudo yum -y install openssh-server 
-> sudo sshd-keygen
-> sudo yum -y install csh
+> sudo zypper --non-interactive install openSSH
+> sudo sshd-gen-keys-start
+> sudo zypper --non-interactive install tcsh
 5d5
 < SSHD_SETTINGS_PLACEHOLDER
