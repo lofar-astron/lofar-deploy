@@ -4,6 +4,6 @@
 ---
 > sudo zypper --non-interactive install openSSH
 > sudo sshd-gen-keys-start
-> sudo zypper --non-interactive install tcsh
+> sudo zypper --non-interactive install tcsh python-nose
 5d5
 < SSHD_SETTINGS_PLACEHOLDER
