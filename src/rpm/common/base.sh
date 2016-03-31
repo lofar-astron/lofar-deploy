@@ -39,4 +39,4 @@ yum -y install bison flex ncurses tar bzip2 which
 
 # python packages
 wget --retry-connrefused https://bootstrap.pypa.io/get-pip.py -O - | python
-pip install pyfits pywcs python-monetdb xmlrunner
+pip install pyfits pywcs python-monetdb xmlrunner unittest2

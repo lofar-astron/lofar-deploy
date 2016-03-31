@@ -39,4 +39,4 @@ zypper --non-interactive install bison flex ncurses tar bzip2 which python-pip
 
 # python packages
 pip install --upgrade pip
-pip install pyfits pywcs python-monetdb xmlrunner
+pip install pyfits pywcs python-monetdb xmlrunner unittest2

@@ -42,4 +42,4 @@ apt-get -y install libboost-dev libboost-python-dev libboost-thread-dev libboost
 apt-get -y install bison bzip2 flex python-xmlrunner python-pip
 
 # python packages
-pip install pyfits pywcs python-monetdb
+pip install pyfits pywcs python-monetdb unittest2
