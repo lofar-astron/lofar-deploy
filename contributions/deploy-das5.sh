@@ -38,7 +38,7 @@ INSTALL_LOFAR=true
 ########## set package version (if install)  ##########
 
 # versions
-# Note: for wcslib version 5.14, 45 casacore test fail => use 5.11
+# Note: for wcslib version 5.14, 45 casacore test fail => use 5.13
 # Note: das5 needs GSL version 1.15, otherwise installation of GSL confused
 export PYTHON_VERSION=2.7
 export GCC_VERSION=4.9.3
@@ -99,11 +99,11 @@ export LOFAR_ROOT_DIR=${INSTALLDIR}/lofar/${LOFAR_VERSION_FOLDER}-${INSTALLNAME}
 # install gcc
 if ( $INSTALL_GCC ); then
 echo "Installing GCC from source not supported yet."
-echo "Loading GCC module, version 4.9.3"
-module load gcc/4.9.3
+echo "Loading GCC module"
+module load gcc/${GCC_VERSION}
 else
-echo "Loading GCC module, version 4.9.3"
-module load gcc/4.9.3
+echo "Loading GCC module"
+module load gcc/${GCC_VERSION}
 fi
 
 
@@ -122,7 +122,7 @@ ln -s ${BLAS_ROOT_DIR}/lib/libopenblas.a ${BLAS_ROOT_DIR}/lib/libblas.a
 ln -s ${BLAS_ROOT_DIR}/lib/libopenblas.so ${BLAS_ROOT_DIR}/lib/libblas.so
 else
 echo "Loading OpenBLAS module, version 0.2.17"
-module load openblas/0.2.17
+module load openblas/0.2.17mt
 fi
 
 
@@ -140,7 +140,7 @@ make install
 echo `date` "Completed install-lapack"
 else
 echo "Loading LAPACK module, version 3.6.0"
-module load lapack/3.6.0
+module load lapack/3.6.0-gcc-${GCC_VERSION}
 fi
 
 
@@ -163,7 +163,7 @@ make -j $J install
 echo `date` "Completed install-fftw3"
 else
 echo "Loading FFTW module, version 3.3.4"
-module load fftw/3.3.4
+module load fftw/3.3.4-gcc-${GCC_VERSION}
 fi
 
 
