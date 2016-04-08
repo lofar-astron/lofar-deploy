@@ -421,8 +421,11 @@ fi
 
 # install wsclean
 # Note: install with LOFAR station response correction
+# Note: set CPATH as otherwise, if compiled with LOFAR support, in LOFAR header files 
+# #include <measures/Measures/MeasFrame.h> from casacore is unknown
 if ( $INSTALL_WSCLEAN ); then
 echo `date` "Started install-wsclean"
+CPATH=${CASACORE_ROOT_DIR}/include/casacore:$CPATH
 mkdir -p ${WSCLEAN_ROOT_DIR}/build
 cd ${WSCLEAN_ROOT_DIR}
 wget http://downloads.sourceforge.net/project/wsclean/wsclean-${WSCLEAN_VERSION}/wsclean-${WSCLEAN_VERSION}.tar.bz2
