@@ -31,8 +31,8 @@ INSTALL_CASACORE=true
 INSTALL_CASAREST=true
 INSTALL_PYTHON_CASACORE=true
 INSTALL_AOFLAGGER=true
-INSTALL_WSCLEAN=true
 INSTALL_LOFAR=true
+INSTALL_WSCLEAN=true
 
 
 ########## set package version (if install)  ##########
@@ -400,21 +400,6 @@ echo `date` "Completed install-aoflagger"
 fi
 
 
-# install wsclean
-if ( $INSTALL_WSCLEAN ); then
-echo `date` "Started install-wsclean"
-mkdir -p ${WSCLEAN_ROOT_DIR}/build
-cd ${WSCLEAN_ROOT_DIR}
-wget http://downloads.sourceforge.net/project/wsclean/wsclean-${WSCLEAN_VERSION}/wsclean-${WSCLEAN_VERSION}.tar.bz2
-tar xf wsclean-${WSCLEAN_VERSION}.tar.bz2
-cd build
-cmake -DCMAKE_INSTALL_PREFIX=${WSCLEAN_ROOT_DIR} -DCMAKE_PREFIX_PATH="${CASACORE_ROOT_DIR};${CFITSIO_ROOT_DIR};${FFTW3_ROOT_DIR};${GSL_ROOT_DIR}" -DBUILD_SHARED_LIBS=TRUE ../wsclean-${WSCLEAN_VERSION}
-make -j ${J}
-make install
-echo `date` "Completed install-wsclean"
-fi
-
-
 # install lofar
 # Note: hack to force use of a specific LAPACK/BLAS
 # Note: remove vraiants.fs5 to prevent using this file on the head note
@@ -431,4 +416,20 @@ cmake -DBUILD_PACKAGES=Offline -DCMAKE_INSTALL_PREFIX=${LOFAR_ROOT_DIR} -DWCSLIB
 make -j ${J}
 make install
 echo `date` "Completed install-lofar"
+fi
+
+
+# install wsclean
+# Note: install with LOFAR station response correction
+if ( $INSTALL_WSCLEAN ); then
+echo `date` "Started install-wsclean"
+mkdir -p ${WSCLEAN_ROOT_DIR}/build
+cd ${WSCLEAN_ROOT_DIR}
+wget http://downloads.sourceforge.net/project/wsclean/wsclean-${WSCLEAN_VERSION}/wsclean-${WSCLEAN_VERSION}.tar.bz2
+tar xf wsclean-${WSCLEAN_VERSION}.tar.bz2
+cd build
+cmake -DCMAKE_INSTALL_PREFIX=${WSCLEAN_ROOT_DIR} -DCMAKE_PREFIX_PATH="${LOFAR_ROOT_DIR};${CASACORE_ROOT_DIR};${CFITSIO_ROOT_DIR};${FFTW3_ROOT_DIR};${GSL_ROOT_DIR}" -DBUILD_SHARED_LIBS=TRUE ../wsclean-${WSCLEAN_VERSION}
+make -j ${J}
+make install
+echo `date` "Completed install-wsclean"
 fi
