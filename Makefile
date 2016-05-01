@@ -25,6 +25,7 @@ define clean
 endef
 
 default:
+	$(call build,src/deb/ubuntu/16.04)
 	$(call build,src/deb/ubuntu/14.04)
 	$(call build,src/deb/ubuntu/12.04)
 	$(call build,src/deb/debian/7)
@@ -37,6 +38,7 @@ default:
 	$(call build,src/rpm/suse/42.1)
 
 clean:
+	$(call clean,src/deb/ubuntu/16.04)
 	$(call clean,src/deb/ubuntu/14.04)
 	$(call clean,src/deb/ubuntu/12.04)
 	$(call clean,src/deb/debian/7)
