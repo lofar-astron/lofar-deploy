@@ -340,6 +340,8 @@ mkdir -p ${CASACORE_ROOT_DIR}/build
 mkdir -p ${CASACORE_ROOT_DIR}/data
 cd ${CASACORE_ROOT_DIR}
 git clone https://github.com/casacore/casacore.git src
+cd ${CASACORE_ROOT_DIR}/src
+git checkout tags/${CASACORE_VERSION}
 cd ${CASACORE_ROOT_DIR}/data
 wget --retry-connrefused ftp://anonymous@ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar
 tar xf WSRT_Measures.ztar
