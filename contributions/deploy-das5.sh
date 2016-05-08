@@ -378,7 +378,9 @@ echo `date` "Started install-casarest"
 mkdir -p ${CASAREST_ROOT_DIR}/build
 cd ${CASAREST_ROOT_DIR}
 git clone https://github.com/casacore/casarest.git src
-cd build
+cd ${CASAREST_ROOT_DIR}/src
+git checkout tags/${CASAREST_VERSION}
+cd ${CASAREST_ROOT_DIR}/build
 cmake -DCMAKE_INSTALL_PREFIX=${CASAREST_ROOT_DIR} -DCASACORE_ROOT_DIR=${CASACORE_ROOT_DIR} -DWCSLIB_ROOT_DIR=${WCSLIB_ROOT_DIR} -DCFITSIO_ROOT_DIR=${CFITSIO_ROOT_DIR} -DCMAKE_PREFIX_PATH="${LAPACK_ROOT_DIR};${BLAS_ROOT_DIR}" ../src/
 make -j ${J}
 make install
