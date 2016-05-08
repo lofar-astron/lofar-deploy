@@ -360,6 +360,7 @@ mkdir -p ${PYTHON_CASACORE_ROOT_DIR}
 cd ${PYTHON_CASACORE_ROOT_DIR}
 git clone https://github.com/casacore/python-casacore
 cd python-casacore
+git checkout tags/${PYTHON_CASACORE_VERSION}
 ./setup.py build_ext -I${WCSLIB_ROOT_DIR}/include:${CASACORE_ROOT_DIR}/include:${CFITSIO_ROOT_DIR}/include:${BOOST_INCLUDE}:/usr/include/python${PYTHON_VERSION} -L${WCSLIB_ROOT_DIR}/lib:${CASACORE_ROOT_DIR}/lib:${CFITSIO_ROOT_DIR}/lib/:${BOOST_LIB} -R${INSTALLDIR}/wcslib/${WCSLIB_VERSION}/lib:${CASACORE_ROOT_DIR}/lib:${CFITSIO_ROOT_DIR}/lib:${BOOST_LIB}
 mkdir -p ${PYTHON_CASACORE_ROOT_DIR}/lib/python${PYTHON_VERSION}/site-packages/
 mkdir -p ${PYTHON_CASACORE_ROOT_DIR}/lib64/python${PYTHON_VERSION}/site-packages/
