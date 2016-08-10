@@ -35,7 +35,7 @@ zypper --non-interactive install gcc gcc-c++ gcc-fortran
 zypper --non-interactive install blas-devel boost-devel fftw3-devel fftw3-threads-devel python-devel lapack-devel libpng16-compat-devel libxml2-devel python-numpy-devel readline-devel ncurses-devel libicu-devel python-scipy
 
 # misc
-zypper --non-interactive install bison flex ncurses tar bzip2 which python-pip
+zypper --non-interactive install bison flex ncurses tar bzip2 which python-pip gettext
 
 # python packages
 pip install --upgrade pip
