@@ -413,7 +413,7 @@ if ( $INSTALL_LOFAR ); then
 echo `date` "Started install-lofar"
 mkdir -p ${LOFAR_ROOT_DIR}/build/gnu_opt
 cd ${LOFAR_ROOT_DIR}
-svn --non-interactive -q --username lofar-guest --password lofar-guest co https://svn.astron.nl/LOFAR/tags/LOFAR-Release-${LOFAR_VERSION} src
+svn --non-interactive -q co https://svn.astron.nl/LOFAR/tags/LOFAR-Release-${LOFAR_VERSION} src
 rm ${LOFAR_ROOT_DIR}/src/CMake/variants/variants.fs5
 sed -i.bak 's+/usr/bin/++g' ${LOFAR_ROOT_DIR}/src/CMake/variants/GNU.cmake
 cd ${LOFAR_ROOT_DIR}/build/gnu_opt
