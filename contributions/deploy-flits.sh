@@ -59,9 +59,9 @@ mkdir -p ${INSTALLDIR}/casacore/build
 mkdir -p ${INSTALLDIR}/casacore/data 
 cd ${INSTALLDIR}/casacore && git clone https://github.com/casacore/casacore.git src 
 if [ "${CASACORE_VERSION}" != "latest" ]; then cd ${INSTALLDIR}/casacore/src && git checkout tags/v${CASACORE_VERSION}; fi 
-cd ${INSTALLDIR}/casacore/data && wget --retry-connrefused ftp://ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar 
+cd ${INSTALLDIR}/casacore/data && wget --retry-connrefused ftp://anonymous@ftp.astron.nl/outgoing/Measures/WSRT_Measures.ztar 
 cd ${INSTALLDIR}/casacore/data && tar xf WSRT_Measures.ztar  && rm -f WSRT_Measures.ztar 
-cd ${INSTALLDIR}/casacore/ && wget ftp://ftp.atnf.csiro.au/pub/software/asap/data/asap_data.tar.bz2 
+cd ${INSTALLDIR}/casacore/ && wget ftp://anonymous@ftp.atnf.csiro.au/pub/software/asap/data/asap_data.tar.bz2 
 cd ${INSTALLDIR}/casacore/ && tar xf asap_data.tar.bz2 && rm -f asap_data.tar.bz2
 cd ${INSTALLDIR}/casacore/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/casacore/ -DDATA_DIR=${INSTALLDIR}/casacore/data -DBUILD_PYTHON=True -DENABLE_TABLELOCKING=ON -DUSE_OPENMP=ON -DUSE_FFTW3=TRUE -DUSE_HDF5=ON -DCXX11=ON -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fsigned-char -O2 -DNDEBUG -march=native" ../src/ 
 cd ${INSTALLDIR}/casacore/build && make  -j
@@ -226,11 +226,4 @@ cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/lofar/ -DCASAREST_ROOT_DIR=${INSTALLD
 ake -j 4
 make install
 bash -c "rm -rf ${INSTALLDIR}/dysco/build" 
-
-#********************
-# CASA measures
-#********************
-
-cd ${INSTALLDIR}/casacore/data
-wget ftp://ftp.atnf.csiro.au/pub/software/asap/data/asap_data.tar.bz2 && tar -xjvf asap_data.tar.bz2
 
