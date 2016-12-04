@@ -1,0 +1,4 @@
+# Two lines added by LOFAR install script
+_OLD_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+_OLD_PYTHONPATH="$PYTHONPATH"
+# End of two lines added by LOFAR install script

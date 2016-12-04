@@ -1,0 +1,14 @@
+    # Functions added by LOFAR install script to keep environment clean 
+    if ! [ -z ${_OLD_LD_LIBRARY_PATH+x} ] ; then
+        LD_LIBRARY_PATH="$_OLD_LD_LIBRARY_PATH"
+        export LD_LIBRARY_PATH
+        unset _OLD_LD_LIBRARY_PATH
+    fi
+
+    if ! [ -z ${_OLD_PYTHONPATH+x} ] ; then
+        PYTHONPATH="$_OLD_PYTHONPATH"
+        export PYTHONPATH
+        unset _OLD_PYTHONPATH
+    fi
+    # End of LOFAR specificfunctions for clean environment
+
