@@ -6,4 +6,4 @@ Note that those scripts have been proven to work in a specific environment. Don'
 
 List of scripts:  
 deploy-das5.sh - Used to deploy the software on the ASTRON cluster of DAS5 to be used on the whole cluster.  
-deploy-flits.sh - Used to deploy the software in a virtualenv on a flits node. 
+flits - Contains deploy-flits.sh which is used to deploy the software in a virtualenv on a flits node. The two other files are patches to extend the virtualenv funtionality to our needs. 
