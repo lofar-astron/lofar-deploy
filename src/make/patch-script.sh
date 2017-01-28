@@ -79,8 +79,10 @@ then
     TMP_PATCH=PATCH_$$
     cp ${PATH_SHELL} ${TMP_SHELL}
     cp ${PATH_PATCH} ${TMP_PATCH}
-    patch ${TMP_SHELL} ${TMP_PATCH} -o - 2> /dev/null
-    rm ${TMP_SHELL} ${TMP_PATCH}
+    TMP_OUT=OUT_$$
+    patch ${TMP_SHELL} ${TMP_PATCH} -o ${TMP_OUT} 2> /dev/null
+    cat ${TMP_OUT}
+    rm ${TMP_SHELL} ${TMP_PATCH} ${TMP_OUT}
 else
     # Output the script
     cat ${PATH_SHELL}
