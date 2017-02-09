@@ -80,7 +80,7 @@ then
     cp ${PATH_SHELL} ${TMP_SHELL}
     cp ${PATH_PATCH} ${TMP_PATCH}
     TMP_OUT=OUT_$$
-    patch ${TMP_SHELL} ${TMP_PATCH} -o ${TMP_OUT} 2> /dev/null
+    patch ${TMP_SHELL} ${TMP_PATCH} -o ${TMP_OUT} &> /dev/null
     cat ${TMP_OUT}
     rm ${TMP_SHELL} ${TMP_PATCH} ${TMP_OUT}
 else
