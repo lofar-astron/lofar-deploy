@@ -96,6 +96,7 @@ define docker-file
 	$(call docker-run,install-casacore)
 	$(call docker-run,install-casarest)
 	$(call docker-run,install-python-casacore)
+	$(call docker-run,install-pybdsf)
 	$(call docker-run,install-aoflagger)
 	$(call docker-run,install-log4cplus)
 	$(call docker-run,install-lofar)
