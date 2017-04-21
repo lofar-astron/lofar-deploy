@@ -62,7 +62,8 @@ mkdir -p ${INSTALLDIR}
 
 virtualenv ${INSTALLDIR}
 sed -i '/deactivate () {/ r deactivate_functions' ${INSTALLDIR}/bin/activate
-sed -i '/$VIRTUAL_ENV\/bin:$PATH\nexport PATH/ r activate_functions' ${INSTALLDIR}/bin/activate
+awk 'NR==FNR{bfile = bfile $0 RS; next} /# unset PYTHONHOME if set/{printf "%s\n", bfile} {print}' activate_functions ${INSTALLDIR}/bin/activate  > _tmp
+mv _tmp ${INSTALLDIR}/bin/activate 
 source ${INSTALLDIR}/bin/activate
 
 #*******************
@@ -141,14 +142,13 @@ bash -c "rm -rf ${INSTALLDIR}/aoflagger/aoflagger-${AOFLAGGER_VERSION}.tar.bz2"
 # *******************
 #   LOFAR
 # *******************
-
 # Install
 mkdir -p ${INSTALLDIR}/lofar/build/${LOFAR_BUILDVARIANT} 
 cd ${INSTALLDIR}/lofar 
 #svn --non-interactive -q co -r 35323 -N https://svn.astron.nl/LOFAR/branches/LOFAR-Release-2_18 src;
 #svn --non-interactive -q --ignore-externals co -r 35694 -N https://svn.astron.nl/LOFAR/trunk src; # cxx11 compiler fix implemented in the trunk, not current branches
-svn --non-interactive -q --ignore-externals co -r ${LOFAR_REVISION} -N https://svn.astron.nl/LOFAR/trunk src; # cxx11 compiler fix implemented in the trunk, not current branches
-svn --non-interactive -q up src/CMake 
+svn --non-interactive -q --ignore-externals co -r ${LOFAR_REVISION} https://svn.astron.nl/LOFAR/trunk src; # cxx11 compiler fix implemented in the trunk, not current branches
+#svn --non-interactive -q up -r ${LOFAR_REVISION} src/CMake 
 #cd ${INSTALLDIR}/lofar/build/${LOFAR_BUILDVARIANT} && cmake -DBUILD_PACKAGES=Offline -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/lofar/ -DCASAREST_ROOT_DIR=${INSTALLDIR}/casarest/ -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore/ -DAOFLAGGER_ROOT_DIR=${INSTALLDIR}/aoflagger/ -DQPID_ROOT_DIR=/opt/qpid/ -DUSE_OPENMP=True ${INSTALLDIR}/lofar/src/
 cd ${INSTALLDIR}/lofar/build/${LOFAR_BUILDVARIANT} && cmake -DBUILD_PACKAGES="Offline"  -DBUILD_TESTING=OFF -DCMAKE_INSTALL_PREFIX=${INSTALLDIR} -DCASAREST_ROOT_DIR=${INSTALLDIR} -DCASACORE_ROOT_DIR=${INSTALLDIR} -DCASA_ROOT_DIR=${INSTALLDIR} -DBOOST_ROOT_DIR=${INSTALLDIR} -DLINK_DIRECTORIES=${INSTALLDIR}/stage/lib -DAOFLAGGER_ROOT_DIR=${INSTALLDIR} -DUSE_OPENMP=True ${INSTALLDIR}/lofar/src/ -DMAKE_AOFlagger=OFF # Modified to build the AO flagger as an external component with the latest tools as per the wiki build instructions
 cd ${INSTALLDIR}/lofar/build/${LOFAR_BUILDVARIANT} && sed -i '29,31d' include/ApplCommon/PosixTime.h 
