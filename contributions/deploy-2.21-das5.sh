@@ -122,7 +122,7 @@ echo `date` "Completed install-cfitsio"
 echo `date` "Started install-wcslib"
 mkdir -p ${WCSLIB_BUILD_DIR}
 if [ "${WCSLIB_VERSION}" = "latest" ]; then cd ${WCSLIB_BUILD_DIR} && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 -O wcslib-latest.tar.bz2; fi
-if [ "${WCSLIB_VERSION}" != "latest" ]; then cd ${WCSLIB_BUILD_DIR} && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib-${WCSLIB_VERSION}.tar.bz2; fi
+if [ "${WCSLIB_VERSION}" != "latest" ]; then cd ${WCSLIB_BUILD_DIR} && wget --retry-connrefused http://www.astro-wise.org/losoft/wcslib-${WCSLIB_VERSION}.tar.bz2; fi
 cd ${WCSLIB_BUILD_DIR} && tar xf wcslib-*.tar.bz2
 cd ${WCSLIB_BUILD_DIR}/wcslib* && ./configure --prefix=${WCSLIB_ROOT_DIR} --with-cfitsiolib=${CFITSIO_ROOT_DIR}/lib/ --with-cfitsioinc=${CFITSIO_ROOT_DIR}/include/ --without-pgplot
 cd ${WCSLIB_BUILD_DIR}/wcslib* && make
