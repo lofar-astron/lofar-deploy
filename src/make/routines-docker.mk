@@ -94,6 +94,7 @@ define docker-file
 	$(call docker-run,install-cfitsio)
 	$(call docker-run,install-wcslib)
 	$(call docker-run,install-casacore)
+	$(call script-run,install-hdf5)
 	$(call docker-run,install-casarest)
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-aoflagger)

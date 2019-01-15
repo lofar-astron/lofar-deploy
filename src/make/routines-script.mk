@@ -59,6 +59,7 @@ define deploy-file
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
+	$(call script-run,install-hdf5)
 	$(call script-run,install-casarest)
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-aoflagger)
