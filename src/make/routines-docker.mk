@@ -100,6 +100,7 @@ define docker-file
 	$(call docker-run,install-aoflagger)
 	$(call docker-run,install-log4cplus)
 	$(call script-run,install-idg)
+	$(call script-run,install-lofarbeam)
 	$(call script-run,install-wsclean)
 	$(call docker-run,install-lofar)
 	$(call docker-init,init-lofar)

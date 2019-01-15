@@ -65,6 +65,7 @@ define deploy-file
 	$(call script-run,install-aoflagger)
 	$(call script-run,install-log4cplus)
 	$(call script-run,install-idg)
+	$(call script-run,install-lofarbeam)
 	$(call script-run,install-wsclean)
 	$(call script-run,install-lofar)
 	$(call script-init,init-lofar)
