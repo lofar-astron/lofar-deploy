@@ -64,6 +64,7 @@ define deploy-file
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-aoflagger)
 	$(call script-run,install-log4cplus)
+	$(call script-run,install-idg)
 	$(call script-run,install-lofar)
 	$(call script-init,init-lofar)
 	$(call install,${DEPLOYFILE})
