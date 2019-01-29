@@ -67,6 +67,7 @@ define deploy-file
 	$(call script-run,install-idg)
 	$(call script-run,install-lofarbeam)
 	$(call script-run,install-wsclean)
+	$(call script-run,install-dysco)
 	$(call script-run,install-lofar)
 	$(call script-init,init-lofar)
 	$(call install,${DEPLOYFILE})

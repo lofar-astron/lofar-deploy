@@ -102,6 +102,7 @@ define docker-file
 	$(call script-run,install-idg)
 	$(call script-run,install-lofarbeam)
 	$(call script-run,install-wsclean)
+	$(call script-run,install-dysco)
 	$(call docker-run,install-lofar)
 	$(call docker-init,init-lofar)
 	$(call docker-entrypoint)
