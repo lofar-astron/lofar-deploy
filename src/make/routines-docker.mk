@@ -101,9 +101,4 @@ define docker-file
 	$(call script-run,install-dysco)
 	$(call script-run,install-dp3)
 	$(call install,${DOCKERFILE})
-
-define docker-test-file
-	$(call docker-file,$(1))
-	$(call docker-run,prepare-tests)
-	$(call docker-run,run-tests)
-endef 
+endef
