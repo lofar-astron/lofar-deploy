@@ -17,8 +17,7 @@
 #
 
 mkdir ${INSTALLDIR}/wcslib
-if [ "${WCSLIB_VERSION}" = "latest" ]; then cd ${INSTALLDIR}/wcslib && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 -O wcslib-latest.tar.bz2; fi
-if [ "${WCSLIB_VERSION}" != "latest" ]; then cd ${INSTALLDIR}/wcslib && wget --retry-connrefused http://www.astro-wise.org/losoft/wcslib-${WCSLIB_VERSION}.tar.bz2; fi
+cd ${INSTALLDIR}/wcslib && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib.tar.bz2 -O wcslib-${WCSLIB_VERSION}.tar.bz2
 cd ${INSTALLDIR}/wcslib && tar xf wcslib-*.tar.bz2
 cd ${INSTALLDIR}/wcslib/wcslib* && ./configure --prefix=${INSTALLDIR}/wcslib --with-cfitsiolib=${INSTALLDIR}/cfitsio/lib/ --with-cfitsioinc=${INSTALLDIR}/cfitsio/include/ --without-pgplot
 cd ${INSTALLDIR}/wcslib/wcslib* && make
