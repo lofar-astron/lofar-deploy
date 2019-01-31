@@ -20,6 +20,6 @@ mkdir -p ${INSTALLDIR}/dp3/build
 cd ${INSTALLDIR}/dp3 && wget https://github.com/lofar-astron/DP3/archive/v${DP3_VERSION}.tar.gz
 cd ${INSTALLDIR}/dp3 && tar xvf v${DP3_VERSION}.tar.gz
 sed -i '/e.printError/d' ${INSTALLDIR}/dp3/DP3-${DP3_VERSION}/DPPP/SolTab.cc
-cd ${INSTALLDIR}/dp3/build && -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/dp3 cmake ../DP3-${DP3_VERSION} -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore  -DCFITSIO_LIBRARY=${INSTALLDIR}/cfitsio/lib/libcfitsio.so -DCFITSIO_INCLUDE_DIR=${INSTALLDIR}/cfitsio/include -DAOFLAGGER_INCLUDE_DIR=${INSTALLDIR}/aoflagger/include -DAOFLAGGER_LIB=${INSTALLDIR}/aoflagger/lib/libaoflagger.so
+cd ${INSTALLDIR}/dp3/build && cmake ../DP3-${DP3_VERSION} -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore  -DCFITSIO_LIBRARY=${INSTALLDIR}/cfitsio/lib/libcfitsio.so -DCFITSIO_INCLUDE_DIR=${INSTALLDIR}/cfitsio/include -DAOFLAGGER_INCLUDE_DIR=${INSTALLDIR}/aoflagger/include -DAOFLAGGER_LIB=${INSTALLDIR}/aoflagger/lib/libaoflagger.so -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/dp3
 cd ${INSTALLDIR}/dp3/build && make -j ${J}
 cd ${INSTALLDIR}/dp3/build && make install
