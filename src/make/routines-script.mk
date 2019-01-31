@@ -60,7 +60,6 @@ define deploy-file
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
 	$(call script-run,install-hdf5)
-	$(call script-run,install-casarest)
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-aoflagger)
 	$(call script-run,install-log4cplus)
@@ -69,7 +68,5 @@ define deploy-file
 	$(call script-run,install-wsclean)
 	$(call script-run,install-dysco)
 	$(call script-run,install-dp3)
-	$(call script-run,install-lofar)
-	$(call script-init,init-lofar)
 	$(call install,${DEPLOYFILE})
 endef

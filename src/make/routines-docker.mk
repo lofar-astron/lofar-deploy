@@ -67,9 +67,6 @@ define docker-set-uid
 endef
 
 define docker-entrypoint
-	$(call write-header,"entrypoint",${DOCKERFILE})
-	@echo 'ENTRYPOINT /bin/bash --init-file /usr/bin/init.sh' >> ${DOCKERFILE}
-	@echo ""                                                  >> ${DOCKERFILE}
 endef
 
 define docker-build-options
@@ -95,7 +92,6 @@ define docker-file
 	$(call docker-run,install-wcslib)
 	$(call docker-run,install-casacore)
 	$(call script-run,install-hdf5)
-	$(call docker-run,install-casarest)
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-aoflagger)
 	$(call docker-run,install-log4cplus)
@@ -104,11 +100,7 @@ define docker-file
 	$(call script-run,install-wsclean)
 	$(call script-run,install-dysco)
 	$(call script-run,install-dp3)
-	$(call docker-run,install-lofar)
-	$(call docker-init,init-lofar)
-	$(call docker-entrypoint)
 	$(call install,${DOCKERFILE})
-endef
 
 define docker-test-file
 	$(call docker-file,$(1))
