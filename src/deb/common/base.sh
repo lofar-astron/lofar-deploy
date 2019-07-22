@@ -27,7 +27,7 @@ apt-get -y install sudo
 apt-get -y install git subversion wget
 
 # build
-apt-get -y install automake autotools-dev cmake make python-setuptools
+apt-get -y install automake autotools-dev make python-setuptools
 
 # compiler
 apt-get -y install  g++ gcc gfortran

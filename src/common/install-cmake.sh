@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015
+# Copyright (C) 2019
 # This file is part of lofar-profiling.
 #
 # lofar-profiling is free software: you can redistribute it and/or modify
@@ -16,11 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-# User to install software for
-USER lofar
-
-# Directory to install software in
-INSTALLDIR /home/${USER}/opt
-
-# Add ${INSTALLDIR}/bin to PATH
-PATH "${INSTALLDIR}/bin:${PATH}"
+mkdir -p ${INSTALLDIR}/cmake
+cd ${INSTALLDIR}/cmake && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
+cd ${INSTALLDIR}/cmake && tar xvf cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
+ln -s ${INSTALLDIR}/cmake/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/cmake ${INSTALLDIR}/bin/

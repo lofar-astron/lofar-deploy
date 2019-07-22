@@ -88,6 +88,7 @@ define docker-file
 	$(call docker-run,base)
 	$(call docker-run,setup-account)
 	$(call docker-user)
+	$(call docker-run,install-cmake)
 	$(call docker-run,install-cfitsio)
 	$(call docker-run,install-wcslib)
 	$(call docker-run,install-casacore)

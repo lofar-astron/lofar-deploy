@@ -26,7 +26,7 @@ yum -y install sudo
 yum -y install git svn wget 
 
 # build
-yum -y install automake-devel aclocal autoconf autotools cmake make
+yum -y install automake-devel aclocal autoconf autotools make
 
 # compiler
 yum -y install g++ gcc gcc-c++ gcc-gfortran
