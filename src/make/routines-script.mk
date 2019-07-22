@@ -57,6 +57,7 @@ define deploy-file
 	$(call script-build-options)
 	$(call script-run,base)
 	$(call script-run,install-cmake)
+	$(call script-run,install-boost)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
