@@ -17,8 +17,7 @@
 #
 
 mkdir -p ${INSTALLDIR}/hdf5/build
-HDF5_VERSION_=$(echo $HDF5_VERSION | head -c 4)
-cd ${INSTALLDIR}/hdf5 && wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_VERSION_}/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.gz
+cd ${INSTALLDIR}/hdf5 && wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-$(echo $HDF5_VERSION | head -c 4)/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.gz
 cd ${INSTALLDIR}/hdf5 && tar xvf hdf5-${HDF5_VERSION}.tar.gz
 cd ${INSTALLDIR}/hdf5/build && cmake -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/hdf5 ../hdf5-${HDF5_VERSION}
 cd ${INSTALLDIR}/hdf5/build && make -j ${J}
