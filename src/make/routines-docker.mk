@@ -95,7 +95,6 @@ define docker-file
 	$(call docker-run,install-hdf5)
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-aoflagger)
-	$(call docker-run,install-log4cplus)
 	$(call docker-run,install-idg)
 	$(call docker-run,install-lofarbeam)
 	$(call docker-run,install-wsclean)

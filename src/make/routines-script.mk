@@ -63,7 +63,6 @@ define deploy-file
 	$(call script-run,install-hdf5)
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-aoflagger)
-	$(call script-run,install-log4cplus)
 	$(call script-run,install-idg)
 	$(call script-run,install-lofarbeam)
 	$(call script-run,install-wsclean)
