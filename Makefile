@@ -25,27 +25,19 @@ define clean
 endef
 
 default:
+	$(call build,src/deb/ubuntu/18.04)
 	$(call build,src/deb/ubuntu/16.04)
 	$(call build,src/deb/ubuntu/14.04)
 	$(call build,src/deb/ubuntu/12.04)
 	$(call build,src/deb/debian/7)
 	$(call build,src/deb/debian/8)
-	$(call build,src/rpm/centos/6)
-	$(call build,src/rpm/centos/6.4)
 	$(call build,src/rpm/centos/7)
-	$(call build,src/rpm/fedora/21)
-	$(call build,src/rpm/fedora/23)
-	$(call build,src/rpm/suse/42.1)
 
 clean:
+	$(call clean,src/deb/ubuntu/18.04)
 	$(call clean,src/deb/ubuntu/16.04)
 	$(call clean,src/deb/ubuntu/14.04)
 	$(call clean,src/deb/ubuntu/12.04)
 	$(call clean,src/deb/debian/7)
 	$(call clean,src/deb/debian/8)
-	$(call clean,src/rpm/centos/6)
-	$(call clean,src/rpm/centos/6.4)
 	$(call clean,src/rpm/centos/7)
-	$(call clean,src/rpm/fedora/21)
-	$(call clean,src/rpm/fedora/23)
-	$(call build,src/rpm/suse/42.1)
