@@ -18,7 +18,6 @@
 
 mkdir -p ${INSTALLDIR}/wsclean/build
 cd ${INSTALLDIR}/wsclean && git clone https://git.code.sf.net/p/wsclean/code wsclean
-cd ${INSTALLDIR}/wsclean/build && cmake -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DCASACORE_INCLUDE_DIRS=${INSTALLDIR}/casasore/include -DCFITSIO_LIBRARY=${INSTALLDIR}/cfitsio/lib/libcfitsio.so -DCFITSIO_INCLUDE_DIR=${INSTALLDIR}/cfitsio/include -DHDF5_ROOT=${INSTALLDIR}/hdf5
--DIDGAPI_DIR=${INSTALLDIR}/idg -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/wsclean -DLOFAR_STATION_RESPONSE_LIB=${INSTALLDIR}/lofarbeam/lib/libstationresponse.so -DLOFAR_STATION_RESPONSE_DIR=${INSTALLDIR}/lofarbeam/include ${INSTALLDIR}/wsclean/wsclean/wsclean
+cd ${INSTALLDIR}/wsclean/build && cmake -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DCASACORE_INCLUDE_DIRS=${INSTALLDIR}/casasore/include -DCFITSIO_LIBRARY=${INSTALLDIR}/cfitsio/lib/libcfitsio.so -DCFITSIO_INCLUDE_DIR=${INSTALLDIR}/cfitsio/include -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DIDGAPI_DIR=${INSTALLDIR}/idg -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/wsclean -DLOFAR_STATION_RESPONSE_LIB=${INSTALLDIR}/lofarbeam/lib/libstationresponse.so -DLOFAR_STATION_RESPONSE_DIR=${INSTALLDIR}/lofarbeam/include -DBoost_INCLUDE_DIR=${INSTALLDIR}/boost/include ${INSTALLDIR}/wsclean/wsclean/wsclean
 cd ${INSTALLDIR}/wsclean/build && make -j ${J}
 cd ${INSTALLDIR}/wsclean/build && make install

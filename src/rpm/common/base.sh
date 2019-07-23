@@ -35,10 +35,10 @@ yum -y install automake-devel aclocal autoconf autotools make
 yum -y install g++ gcc gcc-c++ gcc-gfortran
 
 # libraries
-yum -y install blas-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py bzip2-devel libicu-devel scipy
+yum -y install blas-devel fftw3-devel fftw3-libs python-devel lapack-devel libpng-devel libxml2-devel numpy-devel readline-devel ncurses-devel f2py bzip2-devel libicu-devel scipy gsl-devel
 
 # misc
-yum -y install bison flex ncurses tar bzip2 which gettext
+yum -y install bison flex ncurses tar bzip2 which gettext doxygen
 
 # python packages
 wget --retry-connrefused https://bootstrap.pypa.io/get-pip.py -O - | python

@@ -16,10 +16,11 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
-export BOOST_VERSION=1.69.0
+export BOOST_VERSION=1.68.0
 mkdir -p ${INSTALLDIR}/boost
 cd ${INSTALLDIR}/boost && wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_$(echo ${BOOST_VERSION} | sed 's/\./_/g').tar.gz
 cd ${INSTALLDIR}/boost/ && tar xvf boost_*.tar.gz
 cd ${INSTALLDIR}/boost/boost_* && ./bootstrap.sh --prefix=${INSTALLDIR}/boost
-cd ${INSTALLDIR}/boost/boost_* && ./b2 -j ${J} cxxstd=11 --with-python  --with-date_time --with-filesystem --with-thread --with-system --with-program_options
-cd ${INSTALLDIR}/boost/boost_* && ./bjam install
+cd ${INSTALLDIR}/boost/boost_* && ./b2 cxxstd=11 --with-python --with-date_time --with-filesystem --with-thread --with-system --with-program_options --with-signals -j ${J}
+cd ${INSTALLDIR}/boost/boost_* && ./bjam install -j ${J}
+ln -s ${INSTALLDIR}/boost/lib/libboost_python27.so ${INSTALLDIR}/boost/lib/libboost_python.so

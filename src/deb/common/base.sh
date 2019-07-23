@@ -33,10 +33,10 @@ apt-get -y install automake autotools-dev make python-setuptools
 apt-get -y install  g++ gcc gfortran
 
 # libraries
-apt-get -y install libblas-dev libfftw3-dev python-dev liblapack-dev libpng-dev libxml2-dev python-numpy libreadline-dev libncurses-dev python-scipy liblog4cplus-dev
+apt-get -y install libblas-dev libfftw3-dev python-dev liblapack-dev libpng-dev libxml2-dev python-numpy libreadline-dev libncurses-dev python-scipy liblog4cplus-dev libgsl-dev libgslcblas0
 
 # misc
-apt-get -y install bison bzip2 flex python-xmlrunner python-pip gettext
+apt-get -y install bison bzip2 flex python-xmlrunner python-pip gettext doxygen
 
 # python packages
 pip install pyfits pywcs python-monetdb unittest2

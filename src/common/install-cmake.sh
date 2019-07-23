@@ -20,4 +20,4 @@ export CMAKE_VERSION=3.10.2
 mkdir -p ${INSTALLDIR}/cmake
 cd ${INSTALLDIR}/cmake && wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
 cd ${INSTALLDIR}/cmake && tar xvf cmake-${CMAKE_VERSION}-Linux-x86_64.tar.gz
-ln -s ${INSTALLDIR}/cmake/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/cmake ${INSTALLDIR}/bin/
+ln -s ${INSTALLDIR}/cmake/cmake-${CMAKE_VERSION}-Linux-x86_64/bin/* ${INSTALLDIR}/bin/

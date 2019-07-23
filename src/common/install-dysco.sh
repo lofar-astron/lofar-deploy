@@ -19,6 +19,7 @@
 export DYSCO_VERSION=1.2
 mkdir -p ${INSTALLDIR}/dysco/build
 cd ${INSTALLDIR}/dysco && wget https://github.com/aroffringa/dysco/archive/v${DYSCO_VERSION}.tar.gz
-cd ${INSTALLDIR}/dysco/build && cmake ../dysco-1.2/ -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/dysco
+cd ${INSTALLDIR}/dysco && tar xvf v${DYSCO_VERSION}.tar.gz
+cd ${INSTALLDIR}/dysco/build && cmake -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DBoost_INCLUDE_DIR=${INSTALLDIR}/boost/include -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/dysco ../dysco*
 cd ${INSTALLDIR}/dysco/build && make -j ${J}
 cd ${INSTALLDIR}/dysco/build && make install
