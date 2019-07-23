@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export CFITSIO_VERSION=3450
 mkdir -p ${INSTALLDIR}/cfitsio/build
 cd ${INSTALLDIR}/cfitsio && wget --retry-connrefused ftp://anonymous@heasarc.gsfc.nasa.gov/software/fitsio/c/cfitsio${CFITSIO_VERSION}.tar.gz
 cd ${INSTALLDIR}/cfitsio && tar xf cfitsio${CFITSIO_VERSION}.tar.gz

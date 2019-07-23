@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export WCSLIB_VERSION=6.3
 mkdir ${INSTALLDIR}/wcslib
 cd ${INSTALLDIR}/wcslib && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib-${WCSLIB_VERSION}.tar.bz2 -O wcslib-${WCSLIB_VERSION}.tar.bz2
 cd ${INSTALLDIR}/wcslib && tar xf wcslib-${WCSLIB_VERSION}.tar.bz2

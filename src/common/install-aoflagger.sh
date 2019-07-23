@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export AOFLAGGER_VERSION=v2.12.1
 mkdir -p ${INSTALLDIR}/aoflagger/build
 cd ${INSTALLDIR}/aoflagger && git clone git://git.code.sf.net/p/aoflagger/code aoflagger
 cd ${INSTALLDIR}/aoflagger/aoflagger && git checkout tags/${AOFLAGGER_VERSION}

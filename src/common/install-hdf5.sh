@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export HDF5_VERSION=1.10.1
 mkdir -p ${INSTALLDIR}/hdf5/build
 cd ${INSTALLDIR}/hdf5 && wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-$(echo $HDF5_VERSION | head -c 4)/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.gz
 cd ${INSTALLDIR}/hdf5 && tar xvf hdf5-${HDF5_VERSION}.tar.gz

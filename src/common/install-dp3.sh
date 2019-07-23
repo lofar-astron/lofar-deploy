@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export DP3_VERSION=4.0
 mkdir -p ${INSTALLDIR}/dp3/build
 cd ${INSTALLDIR}/dp3 && wget https://github.com/lofar-astron/DP3/archive/v${DP3_VERSION}.tar.gz
 cd ${INSTALLDIR}/dp3 && tar xvf v${DP3_VERSION}.tar.gz

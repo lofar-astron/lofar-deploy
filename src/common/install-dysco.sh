@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export DYSCO_VERSION=1.2
 mkdir -p ${INSTALLDIR}/dysco/build
 cd ${INSTALLDIR}/dysco && wget https://github.com/aroffringa/dysco/archive/v${DYSCO_VERSION}.tar.gz
 cd ${INSTALLDIR}/dysco/build && cmake ../dysco-1.2/ -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DHDF5_ROOT=${INSTALLDIR}/hdf5 -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/dysco

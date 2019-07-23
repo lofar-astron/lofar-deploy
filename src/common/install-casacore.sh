@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export CASACORE_VERSION=v3.1.2
 mkdir -p ${INSTALLDIR}/casacore/build
 mkdir -p ${INSTALLDIR}/casacore/data
 cd ${INSTALLDIR}/casacore && git clone https://github.com/casacore/casacore.git src

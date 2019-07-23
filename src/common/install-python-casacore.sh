@@ -16,6 +16,7 @@
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
 
+export PYTHON_CASACORE_VERSION=v3.0.0
 mkdir ${INSTALLDIR}/python-casacore
 cd ${INSTALLDIR}/python-casacore && git clone https://github.com/casacore/python-casacore
 if [ "$PYTHON_CASACORE_VERSION" != "latest" ]; then cd ${INSTALLDIR}/python-casacore/python-casacore && git checkout tags/${PYTHON_CASACORE_VERSION}; fi
