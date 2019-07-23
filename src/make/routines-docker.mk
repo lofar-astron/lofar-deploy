@@ -33,8 +33,11 @@ endef
 define docker-run
 	$(call write-header,$(1),${DOCKERFILE})
 	@${MAKE_DIR}/patch-script.sh $(1) \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
-	@echo ""							       >> ${DOCKERFILE}
+	| sed -E 's/export ([A-Z0-9_]*_VERSION)=(.+)/ENV \1 \2/' \
+   	| sed -e '/#/d' \
+	| sed -e '/^$$/d' \
+	| sed -e '/^ENV/! s/^/RUN /g' >> ${DOCKERFILE}
+	@echo ""				      >> ${DOCKERFILE}
 endef
 
 # Add docker ENV command, strips comments and empty lines
