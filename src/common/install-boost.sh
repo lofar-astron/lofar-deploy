@@ -21,5 +21,5 @@ mkdir -p ${INSTALLDIR}/boost
 cd ${INSTALLDIR}/boost && wget https://dl.bintray.com/boostorg/release/${BOOST_VERSION}/source/boost_$(echo ${BOOST_VERSION} | sed 's/\./_/g').tar.gz
 cd ${INSTALLDIR}/boost/ && tar xvf boost_*.tar.gz
 cd ${INSTALLDIR}/boost/boost_* && ./bootstrap.sh --prefix=${INSTALLDIR}/boost
-cd ${INSTALLDIR}/boost/boost_* && ./b2 -j ${J} = a
-cd ${INSTALLDIR}/boost/boost_* && ./bjam --with-python install
+cd ${INSTALLDIR}/boost/boost_* && ./b2 -j ${J} cxxstd=11 --with-python  --with-date_time --with-filesystem --with-thread --with-system --with-program_options
+cd ${INSTALLDIR}/boost/boost_* && ./bjam install
