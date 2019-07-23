@@ -1,0 +1,2 @@
+20a21
+> find ${INSTALLDIR}/wsclean -type f -name "*.cpp" | xargs sed -i '/fftw_make_planner_thread_safe/d'
