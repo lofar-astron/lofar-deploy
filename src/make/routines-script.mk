@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015
+# Copyright (C) 2019
 # This file is part of lofar-profiling.
 # 
 # lofar-profiling is free software: you can redistribute it and/or modify
