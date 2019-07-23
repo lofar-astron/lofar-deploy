@@ -1,17 +1,17 @@
 #
-# Copyright (C) 2015
+# Copyright (C) 2019
 # This file is part of lofar-profiling.
-# 
+#
 # lofar-profiling is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 3 of the License, or
 # (at your option) any later version.
-# 
+#
 # lofar-profiling is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
-# 
+#
 # You should have received a copy of the GNU General Public License
 # along with lofar-profiling.  If not, see <http://www.gnu.org/licenses/>.
 #
@@ -33,8 +33,11 @@ endef
 define docker-run
 	$(call write-header,$(1),${DOCKERFILE})
 	@${MAKE_DIR}/patch-script.sh $(1) \
-	| sed -e '/#/d' -e '/^$$/d' -e 's/^/RUN /' >> ${DOCKERFILE}
-	@echo ""							       >> ${DOCKERFILE}
+	| sed -E 's/export ([A-Z0-9_]*_VERSION)=(.+)/ENV \1 \2/' \
+   	| sed -e '/#/d' \
+	| sed -e '/^$$/d' \
+	| sed -e '/^ENV/! s/^/RUN /g' >> ${DOCKERFILE}
+	@echo ""				      >> ${DOCKERFILE}
 endef
 
 # Add docker ENV command, strips comments and empty lines
@@ -67,9 +70,6 @@ define docker-set-uid
 endef
 
 define docker-entrypoint
-	$(call write-header,"entrypoint",${DOCKERFILE})
-	@echo 'ENTRYPOINT /bin/bash --init-file /usr/bin/init.sh' >> ${DOCKERFILE}
-	@echo ""                                                  >> ${DOCKERFILE}
 endef
 
 define docker-build-options
@@ -85,27 +85,23 @@ define docker-file
 	$(call docker-from,$(1))
 	$(call docker-env,common-environment)
 	$(call docker-env,environment)
-	$(call docker-env,versions)
 	$(call docker-set-uid)
 	$(call docker-build-options)
 	$(call docker-run,base)
 	$(call docker-run,setup-account)
 	$(call docker-user)
+	$(call docker-run,install-cmake)
+	$(call docker-run,install-boost)
 	$(call docker-run,install-cfitsio)
 	$(call docker-run,install-wcslib)
 	$(call docker-run,install-casacore)
-	$(call docker-run,install-casarest)
+	$(call docker-run,install-hdf5)
 	$(call docker-run,install-python-casacore)
 	$(call docker-run,install-aoflagger)
-	$(call docker-run,install-log4cplus)
-	$(call docker-run,install-lofar)
-	$(call docker-init,init-lofar)
-	$(call docker-entrypoint)
+	$(call docker-run,install-idg)
+	$(call docker-run,install-lofarbeam)
+	$(call docker-run,install-wsclean)
+	$(call docker-run,install-dysco)
+	$(call docker-run,install-dp3)
 	$(call install,${DOCKERFILE})
 endef
-
-define docker-test-file
-	$(call docker-file,$(1))
-	$(call docker-run,prepare-tests)
-	$(call docker-run,run-tests)
-endef 

@@ -1,2 +1,2 @@
-BASE="imtiaz/centos64"
+BASE="ubuntu:18.04"
 include ../../../make/Makefile.mk

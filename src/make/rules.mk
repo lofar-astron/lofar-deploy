@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015
+# Copyright (C) 2019
 # This file is part of lofar-profiling.
 # 
 # lofar-profiling is free software: you can redistribute it and/or modify
@@ -28,15 +28,6 @@ dockerfile:
 # Rule to build a container
 build:
 	$(call docker-file,${BASE})
-	$(call docker-build)
-
-# Rule to create a Dockerfile with tests
-test:
-	$(call docker-test-file,${BASE})
-
-# Rule to build and test a container
-build-test:
-	$(call docker-test-file,${BASE})
 	$(call docker-build)
 
 # Rule to create a deploy script

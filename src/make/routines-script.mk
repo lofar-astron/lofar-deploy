@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2015
+# Copyright (C) 2019
 # This file is part of lofar-profiling.
 # 
 # lofar-profiling is free software: you can redistribute it and/or modify
@@ -53,17 +53,20 @@ define deploy-file
 	@rm -f ${DEPLOYFILE}
 	$(call script-env,common-environment)
 	$(call script-env,environment)
-	$(call script-env,versions)
 	$(call script-build-options)
 	$(call script-run,base)
+	$(call script-run,install-cmake)
+	$(call script-run,install-boost)
 	$(call script-run,install-cfitsio)
 	$(call script-run,install-wcslib)
 	$(call script-run,install-casacore)
-	$(call script-run,install-casarest)
+	$(call script-run,install-hdf5)
 	$(call script-run,install-python-casacore)
 	$(call script-run,install-aoflagger)
-	$(call script-run,install-log4cplus)
-	$(call script-run,install-lofar)
-	$(call script-init,init-lofar)
+	$(call script-run,install-idg)
+	$(call script-run,install-lofarbeam)
+	$(call script-run,install-wsclean)
+	$(call script-run,install-dysco)
+	$(call script-run,install-dp3)
 	$(call install,${DEPLOYFILE})
 endef
