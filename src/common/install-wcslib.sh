@@ -17,7 +17,7 @@
 #
 
 export WCSLIB_VERSION=6.3
-mkdir ${INSTALLDIR}/wcslib
+mkdir -p ${INSTALLDIR}/wcslib
 cd ${INSTALLDIR}/wcslib && wget --retry-connrefused ftp://anonymous@ftp.atnf.csiro.au/pub/software/wcslib/wcslib-${WCSLIB_VERSION}.tar.bz2 -O wcslib-${WCSLIB_VERSION}.tar.bz2
 cd ${INSTALLDIR}/wcslib && tar xf wcslib-${WCSLIB_VERSION}.tar.bz2
 cd ${INSTALLDIR}/wcslib/wcslib-${WCSLIB_VERSION} && ./configure --prefix=${INSTALLDIR}/wcslib --with-cfitsiolib=${INSTALLDIR}/cfitsio/lib/ --with-cfitsioinc=${INSTALLDIR}/cfitsio/include/ --without-pgplot
