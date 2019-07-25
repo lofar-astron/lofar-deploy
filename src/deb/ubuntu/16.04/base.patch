@@ -1,4 +1,0 @@
-45a46,48
-> 
-> # LOFAR CMake tries to find multiarray.so while Ubuntu 16.04 installs this library with a architecture-dependent infix
-> cd /usr/lib/python2.7/dist-packages/numpy/core && ln -s `ls multiarray.*.so | head`  multiarray.so
