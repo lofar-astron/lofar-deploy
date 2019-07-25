@@ -18,8 +18,8 @@
 
 export LOFARSTMAN_VERSION=master
 mkdir -p ${INSTALLDIR}/lofarstman/build
-cd ${INSTALLDIR}/lofarstman && wget https://github.com/lofar-astron/DP3/archive/${LOFARSTMAN_VERSION}.tar.gz
+cd ${INSTALLDIR}/lofarstman && wget https://github.com/lofar-astron/LofarStMan/archive/${LOFARSTMAN_VERSION}.tar.gz
 cd ${INSTALLDIR}/lofarstman && tar xvf ${LOFARSTMAN_VERSION}.tar.gz
-cd ${INSTALLDIR}/lofarstman/build && cmake -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/lofarstman
+cd ${INSTALLDIR}/lofarstman/build && cmake -DCASACORE_ROOT_DIR=${INSTALLDIR}/casacore -DCMAKE_INSTALL_PREFIX=${INSTALLDIR}/lofarstman ../LofarStMan-master
 cd ${INSTALLDIR}/lofarstman/build && make -j ${J}
 cd ${INSTALLDIR}/lofarstman/build && make install
