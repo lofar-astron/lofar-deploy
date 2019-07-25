@@ -103,5 +103,6 @@ define docker-file
 	$(call docker-run,install-wsclean)
 	$(call docker-run,install-dysco)
 	$(call docker-run,install-dp3)
+	$(call docker-run,install-lofarstman)
 	$(call install,${DOCKERFILE})
 endef

@@ -68,5 +68,6 @@ define deploy-file
 	$(call script-run,install-wsclean)
 	$(call script-run,install-dysco)
 	$(call script-run,install-dp3)
+	$(call script-run,install-lofarstman)
 	$(call install,${DEPLOYFILE})
 endef
